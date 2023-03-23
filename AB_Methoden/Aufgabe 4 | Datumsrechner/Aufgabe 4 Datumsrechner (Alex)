@@ -1,0 +1,48 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Bitte geben Sie den Tag ein:");
+        int day = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Bitte geben Sie den Monat ein:");
+        int month = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Bitte geben Sie das Jahr ein:");
+        int year = Convert.ToInt32(Console.ReadLine());
+
+        bool isDateCorrect = IsDate(day, month, year);
+
+        if (isDateCorrect)
+        {
+            Console.WriteLine("Die eingegebenen Werte sind korrekt.");
+        }
+        else
+        {
+            Console.WriteLine("Die eingegebenen Werte sind nicht korrekt.");
+        }
+    }
+
+    static bool IsDate(int day, int month, int year)
+    {
+        if (year < 1 || month < 1 || month > 12 || day < 1)
+        {
+            return false;
+        }
+
+        int maxDay = DateTime.DaysInMonth(year, month);
+        if (day > maxDay)
+        {
+            return false;
+        }
+
+        if (month == 2 && day == 29)
+        {
+            return DateTime.IsLeapYear(year);
+        }
+
+        return true;
+    }
+}
