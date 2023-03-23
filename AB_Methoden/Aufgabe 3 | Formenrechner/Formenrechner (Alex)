@@ -1,0 +1,42 @@
+using System;
+
+namespace hs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Volumen von Körpern berechnen.
+
+            // Eingabe 
+            Console.WriteLine("Bitte geben Sie die Höhe in cm ein:");
+            double height = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Bitte geben Sie den Radius in cm ein:");
+            double radius = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Bitte geben Sie den Körpertyp ein (kegel, kugel oder zylinder):");
+            string bodyType = Console.ReadLine().ToLower();
+
+            //Berechnung 
+            double volume = CalcVolume(height, radius, bodyType);
+            Console.WriteLine($"Volumen eines {bodyType}s mit Höhe {height} cm und Radius {radius} cm: {volume:F2} cm³");
+        }
+
+        // Volumen von Körpern berechnen
+        static double CalcVolume(double height, double radius, string bodyType)
+        {
+            switch (bodyType)
+            {
+                case "kegel":
+                    return (Math.PI * Math.Pow(radius, 2) * height) / 3;
+                case "kugel":
+                    return (4.0 / 3) * Math.PI * Math.Pow(radius, 3);
+                case "zylinder":
+                    return Math.PI * Math.Pow(radius, 2) * height;
+                default:
+                    throw new ArgumentException($"Unknown body type: {bodyType}");
+            }
+        }
+    }
+}

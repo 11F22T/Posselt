@@ -1,0 +1,68 @@
+using System;
+
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        //Variablen 
+        string wiederholung;
+        string form; 
+        double radius;
+        double höhe;
+
+        do
+        {   // Eingabe
+            Console.WriteLine("Was für eine Form möchten sie berechnen (Kegel, Kugel, Zylinder");
+            form = Console.ReadLine().Trim();
+
+            Console.WriteLine("Bitte Radius");
+            radius = Convert.ToDouble(Console.ReadLine().Trim());
+
+            if (form != "Kugel")
+            {
+                Console.WriteLine("Bitte Höhe");
+                höhe = Convert.ToDouble(Console.ReadLine().Trim());
+            }
+            else
+            {
+                höhe = 0;
+            }
+
+
+
+            //Aufruf der Methode
+            double ausgabe = Ergebnis(form, radius, höhe);
+
+            //Ausgabe
+            Console.WriteLine($"Das Volumen beträgt: {ausgabe}");
+
+            //Wiederholung
+            Console.WriteLine("Wiederholen Ja/Nein");
+            wiederholung = Console.ReadLine();
+
+        } while (wiederholung.Equals("Ja", StringComparison.OrdinalIgnoreCase));
+        
+    }
+    static double Ergebnis(string form, double radius, double höhe)
+    {
+        switch (form)
+        {
+            case "Kegel":
+                return (Math.PI * Math.Pow(radius, 2) * höhe) / 3 ;
+                break;
+            case "Kugel":
+                return (4 * Math.PI * Math.Pow(radius, 3) / 3) ;
+                break;
+            case "Zylinder":
+                return (Math.PI * Math.Pow(radius, 2) * höhe);
+                break;
+
+            default:
+                Console.WriteLine("Es wurden Fehler gemacht / Falsche Form");
+                return 0;
+                break;
+        }
+    }
+
+}
