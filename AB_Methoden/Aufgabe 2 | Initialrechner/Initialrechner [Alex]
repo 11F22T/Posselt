@@ -1,0 +1,89 @@
+using System;
+
+namespace Zusatzaufgabe_2
+{
+    class Program
+    {
+
+
+
+        static void Main()
+        {
+            //Variablen 
+            string wiederholung = "";
+            string[] nameParts;
+            string fullName;
+            do
+            {
+                do
+                {
+                    // Eingabe des Namens
+                    Console.WriteLine("Bitte geben Sie den vollständigen Namen ein:");
+                    fullName = Console.ReadLine().Trim();
+
+                    // Teilen des Namens in Vor- und Nachnamen, Doppelnamen 
+                    nameParts = fullName.Split(' ');
+
+                } while (nameParts.Length < 2);
+
+
+
+
+                // Extrahieren des Nachnamens und Vornamens...
+                string name = nameParts[nameParts.Length - 1];                                          
+                string vorname = nameParts[0];
+                string doppelname;
+
+                if (nameParts.Length > 2)
+                {
+                    doppelname = nameParts[nameParts.Length - 2];
+                }
+                else
+                {
+                    doppelname = null;
+                }
+                    
+                
+
+                // Aufruf der Methode zur Erstellung der Initialen
+               string initialen = ErstelleInitialen(name, vorname, doppelname);
+
+                // Ausgabe der Initialen
+                Console.WriteLine("Initialen: " + initialen);
+                Console.WriteLine("Name: " + fullName);
+                Console.WriteLine("Vorname: " + vorname);
+                Console.WriteLine("Doppelname: " + doppelname);
+                Console.WriteLine("Nachname: " + name);
+
+                // Abschied
+                Console.WriteLine("Schau");
+
+                //wiederholung 
+                Console.WriteLine("Widerholen Ja/Nein");
+                wiederholung = Console.ReadLine();
+
+            } while (wiederholung == "Ja");
+
+
+            static string ErstelleInitialen(string name, string vorname, string doppelname)
+            {
+                // Extrahieren der ersten Buchstaben des Namens und Vornamens
+                
+                char nameInitial1 = name[0];
+                char vornameInitial1 = vorname[0];
+                char doppelnameInitial = '\0';
+
+                if (doppelname !=null)
+                {
+                    doppelnameInitial = doppelname[0];
+                }
+
+                string initialen = char.ToUpper(vornameInitial1).ToString() + char.ToUpper(doppelnameInitial).ToString() + char.ToUpper(nameInitial1).ToString();
+
+                // Konvertierung der Buchstaben in Großbuchstaben und Rückgabe des Ergebnisses
+                return initialen;
+            }
+
+        }
+    }
+} 
