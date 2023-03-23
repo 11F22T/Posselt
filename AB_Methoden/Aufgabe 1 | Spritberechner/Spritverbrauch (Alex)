@@ -1,0 +1,50 @@
+using System;
+
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Variablen
+        string wiederholung;
+        double sprit;
+        double km;
+
+
+        do
+        {
+            // Eingabe
+            Console.WriteLine("Wie viel haben Sie in Litern getankt?");
+            sprit = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Wie weit sind Sie in km gefahren?");
+            km = Convert.ToDouble(Console.ReadLine());
+
+            double ausgabe = Berechnung(sprit, km);
+
+            // Ausgabe
+            Console.WriteLine($"Ihr Spritverbrauch liegt bei {ausgabe} Litern pro 100 km.");
+
+            Console.WriteLine("Wiederholen? Ja/Nein");
+            wiederholung = Console.ReadLine();
+
+        } while (wiederholung == "Ja");
+    }
+
+    static double Berechnung(double sprit, double km)
+    {
+        double ergebnis = 100 * sprit / km;
+
+
+
+
+        return ergebnis;
+    }
+}
+
+
+
+
+
+
+
