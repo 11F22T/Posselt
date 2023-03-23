@@ -1,0 +1,15 @@
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Bitte geben Sie die gefahrenen Kilometer ein:");
+        double kilometers = double.Parse(Console.ReadLine());
+
+        Console.WriteLine("Bitte geben Sie die getankten Liter ein:");
+        double liters = double.Parse(Console.ReadLine());
+
+        double consumption = 100.0 * liters / kilometers;
+
+        Console.WriteLine($"Der Durchschnittsverbrauch beträgt {0:0.00} Liter auf 100 km.", consumption);
+    }
+}
