@@ -1,1 +1,7 @@
+Aufgabe 1: Bitte erstelle ein Program welches mit einer Methode, die 2 Eingabewerte durch den Benutzer bekommt.
+Die Steigung und die y- Achsenabschnitt von einer Linearen Fuktion ermittelt...
+Ps: Es Muss mit einer out Methdoe ausgelagert werden da man mehr als 2 Rückgabewerte hat. 
+_____________________________________________________________________________________________________________________________________________________________________
 
+Aufgabe 2: Lasse durch den Benutzer die gewünschte ereichende zahl eingeben. In einer ausgelagerten Methode soll 1+2+3 = 6 | 1+2+3+4= 10 gerechnet werden.
+Das Ergebnis dieser Rechnung darf niemals über 9 kommen. Da man nur mit natürlichen Zahlen Rechnen soll und das Erbenis genauso in diesem berech sein. 
