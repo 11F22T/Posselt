@@ -1,0 +1,71 @@
+using System;
+
+namespace AuswahlConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int auswahl = 0;
+            bool weitermachen = true;
+
+            while (weitermachen)
+            {
+                ZeigeOptionen(auswahl);
+
+                ConsoleKeyInfo tastendruck = Console.ReadKey();
+
+                if (tastendruck.Key == ConsoleKey.UpArrow)
+                {
+                    auswahl = Math.Max(auswahl - 1, 0);
+                }
+                else if (tastendruck.Key == ConsoleKey.DownArrow)
+                {
+                    auswahl = Math.Min(auswahl + 1, 3);
+                }
+                else if (tastendruck.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.ResetColor();
+                    Console.WriteLine($"Sie haben Option {auswahl + 1} gewählt.");
+                    if (auswahl == 3)
+                    {
+                        weitermachen = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Drücken Sie eine beliebige Taste, um fortzufahren...");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+            }
+        }
+
+        static void ZeigeOptionen(int auswahl)
+        {
+            Console.Clear();
+            Console.WriteLine("Wählen Sie eine Option aus:");
+
+            string[] optionen = {
+                "1. Option 1",
+                "2. Option 2",
+                "3. Option 3",
+                "4. Beenden"
+            };
+
+            for (int i = 0; i < optionen.Length; i++)
+            {
+                if (i == auswahl)
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+                Console.WriteLine(optionen[i]);
+
+                Console.ResetColor();
+            }
+        }
+    }
+}
