@@ -27,16 +27,26 @@ namespace AuswahlConsoleApp
                 {
                     Console.Clear();
                     Console.ResetColor();
-                    Console.WriteLine($"Sie haben Option {auswahl + 1} gewählt.");
-                    if (auswahl == 3)
+                    switch (auswahl)
                     {
-                        weitermachen = false;
+                        case 0:
+                            Option1();
+                            break;
+                        case 1:
+                            Option2();
+                            break;
+                        case 2:
+                            Option3();
+                            break;
+                        case 3:
+                            weitermachen = false;
+                            break;
                     }
-                    else
+
+                    if (weitermachen)
                     {
                         Console.WriteLine("Drücken Sie eine beliebige Taste, um fortzufahren...");
                         Console.ReadKey();
-                        Console.Clear();
                     }
                 }
             }
@@ -66,6 +76,24 @@ namespace AuswahlConsoleApp
 
                 Console.ResetColor();
             }
+        }
+
+        static void Option1()
+        {
+            // Fügen Sie hier Ihren Code für Option 1 ein
+            Console.WriteLine("Sie haben Option 1 gewählt.");
+        }
+
+        static void Option2()
+        {
+            // Fügen Sie hier Ihren Code für Option 2 ein
+            Console.WriteLine("Sie haben Option 2 gewählt.");
+        }
+
+        static void Option3()
+        {
+            // Fügen Sie hier Ihren Code für Option 3 ein
+            Console.WriteLine("Sie haben Option 3 gewählt.");
         }
     }
 }
