@@ -1,0 +1,208 @@
+// Systembestandteile die genutzt werden ? 
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
+internal class PasswordGenerator
+
+{   // Code von: Alex, Til, Jan, Aaron, Marlon.
+
+    // Haupteil des Cods...  
+    private static void Main(string[] args)
+    {
+        do
+        {   // Willkommensnachricht
+            Console.WriteLine("Willkommen zum Passwortgenerator!");
+            Console.WriteLine();
+
+            // Wie viele Passwörter sollen generiert werden...
+            int numPasswords = GetValidInput("Wie viele Passwörter möchten Sie generieren?", minValue: 1, maxValue: 50);
+            // Erfragung wie lang soll das Passwort sein...
+            int passwordLength = GetValidInput("Wie lang sollen die Passwörter sein? (Minimum 8 Zeichen)", minValue: 8, maxValue: 50);
+
+
+
+            // Erlaubte Zeichen 
+            const string allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-[]{}|;:,.<>?~`";
+
+            // Ausgabe der Passwörter
+            for (int i = 0; i < numPasswords; i++)
+            {
+                string password = GenerateSecurePassword(passwordLength, allowedChars);
+                SavePasswordToFile(password);
+                Console.WriteLine($"Passwort {i + 1}: {password.Substring(0, passwordLength)}");
+            }
+            // Abschiedsnachricht
+            Console.WriteLine();
+            Console.WriteLine("Vielen Dank für die Nutzung des Passwortgenerators!");
+            Console.WriteLine();
+            // Abfrage ob das Programm erneut ausgeführt werden soll...
+        } while (GetYesNoInput("Möchten Sie den Passwortgenerator erneut ausführen? (j/n)"));
+    }
+    // Überpfrüfung ob eine richtige Eingabe gemacht wurde
+    static int GetValidInput(string prompt, int minValue, int maxValue)
+    {
+        int value;
+        bool validInput;
+        do
+        {
+            Console.WriteLine(prompt);
+            validInput = int.TryParse(Console.ReadLine(), out value) && value >= int.MinValue && value <= int.MaxValue;
+            if (!validInput)
+            {
+                Console.WriteLine($"Ungültige Eingabe! Bitte geben Sie eine ganze Zahl ein, die größer oder gleich {maxValue} ist.");
+            }
+        } while (!validInput);
+
+        return value;
+    }
+    // Überpfrüft die Abfrage ob der Benutzer den Code wiederholen will...
+    private static bool GetYesNoInput(string prompt)
+    {
+        do
+        {
+            Console.WriteLine(prompt);
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            if (keyInfo.Key == ConsoleKey.J || keyInfo.Key == ConsoleKey.Y)
+            {
+                return true;
+            }
+            else if (keyInfo.Key == ConsoleKey.N)
+            {
+                return false;
+            }
+        } while (true);
+    }
+    // Generiert das Passwort 
+    private static string GenerateSecurePassword(int passwordLength, string allowedChars)
+    {
+        const int saltLength = 32;
+        const int iterations = 10000;
+
+        byte[] salt = GenerateSalt(saltLength);
+        byte[] passwordBytes = GeneratePasswordBytes(passwordLength, allowedChars, salt, iterations);
+
+        string passwordHash = HashPassword(passwordBytes, salt);
+        return passwordHash;
+    }
+    // GenerateSalt-Methode: Diese Methode generiert einen zufälligen Salt, der bei der Passwortgenerierung verwendet wird.
+    private static byte[] GenerateSalt(int saltLength)
+    {
+        byte[] salt = new byte[saltLength];
+        using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+        {
+            rng.GetBytes(salt);
+        }
+        return salt;
+    }
+    // GeneratePasswordBytes-Methode: Diese Methode generiert die Byte-Repräsentation des Passworts.
+    private static byte[] GeneratePasswordBytes(int passwordLength, string allowedChars, byte[] salt, int iterations)
+    {
+        var pbkdf2 = new Rfc2898DeriveBytes(allowedChars, salt, iterations);
+        byte[] passwordBytes = pbkdf2.GetBytes(passwordLength);
+        return passwordBytes;
+    }
+    // HashPassword-Methode: hode berechnet den Hashwert des Passworts mithilfe des SHA256-Hashalgorithmus.
+    private static string HashPassword(byte[] passwordBytes, byte[] salt)
+    {
+        using (SHA256 sha256 = SHA256.Create())
+        {
+            byte[] saltedPasswordBytes = CombineBytes(passwordBytes, salt);
+            byte[] hashBytes = sha256.ComputeHash(saltedPasswordBytes);
+            string hashString = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            return hashString;
+        }
+    }
+    // CombineBytes-Methode: Diese Methode kombiniert zwei Byte-Arrays zu einem einzigen Byte-Array.
+    private static byte[] CombineBytes(byte[] first, byte[] second)
+    {
+        byte[] combined = new byte[first.Length + second.Length];
+        Buffer.BlockCopy(first, 0, combined, 0, first.Length);
+        Buffer.BlockCopy(second, 0, combined, first.Length, second.Length);
+        return combined;
+    }
+    // Schreibt das Passwort in eine Datei
+    private static void SavePasswordToFile(string passwordHash)
+    {
+        string fileName = "passwords.txt";
+        string passwordInfo = $"{DateTime.Now}: {passwordHash}";
+
+        try
+        {
+            using (StreamWriter sw = File.AppendText(fileName))
+            {
+                sw.WriteLine(passwordInfo);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fehler beim Speichern des Passworts: {ex.Message}");
+        }
+    }
+    // Überpfrüft ob das Passwort wirklich sicher ist...
+    private static bool IsPasswordSecure(string password)
+    {
+        const int minLength = 8;
+        const int minScore = 4;
+        const int maxScore = 5;
+        int score = 0;
+
+        if (password.Length < minLength)
+        {
+            return false;
+        }
+
+        if (password.Any(char.IsUpper))
+        {
+            score++;
+        }
+
+        if (password.Any(char.IsLower))
+        {
+            score++;
+        }
+
+        if (password.Any(char.IsDigit))
+        {
+            score++;
+        }
+
+        if (password.Any(ch => !char.IsLetterOrDigit(ch)))
+        {
+            score++;
+        }
+
+        return score >= minScore && score <= maxScore;
+    }
+    /*_____________________________________________________________________________________________________________________________________________________________________________
+    
+    -Main-Methode: Diese Methode ist der Einstiegspunkt des Programms.
+    > Hier wird der Benutzer begrüßt und dann aufgefordert, die Anzahl und Länge der zu generierenden Passwörter einzugeben.
+    > Dann werden nacheinander die angeforderten Passwörter generiert und auf der Konsole ausgegeben.
+
+    -GetValidInput-Methode: Diese Methode wird verwendet, um eine gültige Benutzereingabe zu erhalten.
+    > Sie gibt eine Meldung aus und fordert den Benutzer auf, eine ganze Zahl größer oder gleich einem Mindestwert einzugeben.
+    > Wenn der Benutzer eine ungültige Eingabe macht, wird eine Fehlermeldung ausgegeben und der Benutzer wird erneut aufgefordert, eine Eingabe zu machen.
+
+    -GetYesNoInput-Methode: Diese Methode wird verwendet, um eine Ja/Nein-Abfrage an den Benutzer zu stellen.
+    > Die Methode gibt eine Meldung aus und wartet dann auf eine Eingabe von der Tastatur.
+    > Wenn der Benutzer 'j' oder 'y' eingibt, wird true zurückgegeben. Wenn der Benutzer 'n' eingibt, wird false zurückgegeben.
+    > Wenn der Benutzer eine andere Eingabe macht, wird erneut nachgefragt.
+
+    -GenerateSecurePassword-Methode: Diese Methode generiert ein sicheres Passwort.
+    > Sie verwendet kryptografische Methoden wie das PBKDF2-Verfahren und den SHA256-Hashalgorithmus, um ein Passwort zu generieren, das schwer zu knacken ist.
+    
+    -GenerateSalt-Methode: Diese Methode generiert einen zufälligen Salt, der bei der Passwortgenerierung verwendet wird.
+    > Der Salt erhöht die Sicherheit des Passworts, indem er es schwieriger macht, das Passwort durch Brute-Force-Angriffe zu erraten.
+
+    -GeneratePasswordBytes-Methode: Diese Methode generiert die Byte-Repräsentation des Passworts.
+    > Sie verwendet das PBKDF2-Verfahren, um die Byte-Repräsentation zu generieren, und berücksichtigt dabei den Salt und die Anzahl der Iterationen.
+    
+    -HashPassword-Methode: Diese Methode berechnet den Hashwert des Passworts mithilfe des SHA256-Hashalgorithmus.
+    > Der Hashwert wird verwendet, um das Passwort in einer sicheren Form zu speichern.
+
+    -CombineBytes-Methode: Diese Methode kombiniert zwei Byte-Arrays zu einem einzigen Byte-Array.
+    
+    _____________________________________________________________________________________________________________________________________________________________________________ */
+}
