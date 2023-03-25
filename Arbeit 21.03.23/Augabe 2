@@ -1,0 +1,48 @@
+//Maximale 9 Da nur Natürliche Zahlen verwendet werden sollten
+//Eingabe 9 
+//1+2+3= 6 | 1+2+3+4=10 ==> wäre keine Natürliche Zahl
+
+using System;
+
+namespace SummeBis9
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Bitte geben Sie eine natürliche Zahl als Argument ein.");
+                return;
+            }
+
+            int eingabe;
+            if (!int.TryParse(args[0], out eingabe) || eingabe < 1)
+            {
+                Console.WriteLine("Bitte geben Sie eine gültige natürliche Zahl ein.");
+                return;
+            }
+
+            int summe = BerechneSummeBis9(eingabe);
+            Console.WriteLine($"Die Summe von 1 bis 9 (begrenzt durch {eingabe}) ist: {summe}");
+        }
+
+        static int BerechneSummeBis9(int grenze)
+        {
+            int summe = 0;
+            for (int i = 1; i <= 9; i++)
+            {
+                if (summe + i <= grenze)
+                {
+                    summe += i;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return summe;
+        }
+    }
+}
