@@ -1,0 +1,41 @@
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        Console.WriteLine("Willkommen zum Passwortgenerator!");
+
+        // Wiederholen Sie den Code, solange der Benutzer es möchte
+        while (true) {
+            Console.Write("Geben Sie die Zeichen ein, die für das Passwort verwendet werden sollen: ");
+            string allowedChars = Console.ReadLine();
+
+            // Generieren Sie das Passwort und geben Sie es aus
+            string password = GeneratePassword(allowedChars);
+            Console.WriteLine("Dein Passwort ist: " + password);
+
+            // Fragen Sie den Benutzer, ob er den Code wiederholen möchte
+            Console.Write("Möchten Sie den Code wiederholen? (ja/nein) ");
+            string answer = Console.ReadLine();
+            if (answer.ToLower() != "ja") {
+                break;
+            }
+        }
+
+        Console.WriteLine("Danke für die Verwendung des Passwortgenerators. Auf Wiedersehen!");
+        Console.ReadLine();
+    }
+
+    static string GeneratePassword(string allowedChars) {
+        // Erstellen Sie einen Zufallszahlengenerator
+        Random rand = new Random();
+
+        // Generieren Sie das Passwort
+        string password = "";
+        for (int i = 0; i < 5; i++) {
+            int index = rand.Next(allowedChars.Length);
+            password += allowedChars[index];
+        }
+
+        return password;
+    }
+}
