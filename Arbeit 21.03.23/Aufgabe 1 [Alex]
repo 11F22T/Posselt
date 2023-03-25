@@ -1,0 +1,30 @@
+//Das Programm fragt den Benutzer nach den x- und y-Koordinaten zweier Punkte auf der Linie und berechnet dann die Steigung und den y-Achsenabschnitt der Linie mit Hilfe der Formeln:
+
+//m = (y2 - y1) / (x2 - x1)
+
+//b = y1 - m * x1
+
+//Dann gibt das Programm die berechneten Werte aus. Beachten Sie, dass dieses Programm keine Überprüfung auf ungültige Eingaben oder auf den Fall einer vertikalen Linie enthält.
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        Console.WriteLine("Geben Sie die x-Koordinate des ersten Punktes ein:");
+        double x1 = double.Parse(Console.ReadLine());
+        
+        Console.WriteLine("Geben Sie die y-Koordinate des ersten Punktes ein:");
+        double y1 = double.Parse(Console.ReadLine());
+        
+        Console.WriteLine("Geben Sie die x-Koordinate des zweiten Punktes ein:");
+        double x2 = double.Parse(Console.ReadLine());
+        
+        Console.WriteLine("Geben Sie die y-Koordinate des zweiten Punktes ein:");
+        double y2 = double.Parse(Console.ReadLine());
+        
+        double m = (y2 - y1) / (x2 - x1); // Berechnung der Steigung
+        double b = y1 - m * x1; // Berechnung des y-Achsenabschnitts
+        
+        Console.WriteLine("Die Steigung der Linie ist " + m);
+        Console.WriteLine("Der y-Achsenabschnitt der Linie ist " + b);
+    }
+}
