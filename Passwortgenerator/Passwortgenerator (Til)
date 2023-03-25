@@ -1,0 +1,57 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        //Variablen 
+        String wiederhohlung = "";
+
+        do
+        {
+            Console.WriteLine("Willkommen, dies ist eion Passwortgenerator der mithilfe deiner Zeichen ein 5 stelliges Passwort erzeugt");
+
+            //Eingabe 
+            Console.WriteLine("Gebe die Zeichen ein die du für das Passwort verwenden willst.");
+            string zeichen = Console.ReadLine();
+
+            //Ausgabe 
+            string Passwort = generierung(zeichen);
+            Console.WriteLine("Dein Passwort ist  " + Passwort);
+
+            //Abschied 
+            Console.WriteLine("Danke das sie den Passwortgenerator verwendet haben ^^");
+            //Wiederholhung 
+            Console.WriteLine("Für erneutes erstellen Ja/Nein eingeben");
+            wiederhohlung = Console.ReadLine();
+
+
+        } while (wiederhohlung == "Ja");
+
+
+
+
+        static string generierung(string zeichen)
+        {
+
+            // Erstellung eines Zufallsgenerators 
+            Random erzeugung = new Random();
+
+            // Generierung eines Passwortes 
+            string Passwort = "";
+
+            for (int i = 0; i < 5; i++)
+            {
+
+
+                int lul = erzeugung.Next(zeichen.Length);
+                Passwort = Passwort + zeichen[lul]; 
+            }
+            return Passwort; 
+
+
+        }
+
+
+    }
+}
