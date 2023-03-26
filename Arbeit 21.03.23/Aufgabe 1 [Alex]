@@ -1,11 +1,32 @@
-//Das Programm fragt den Benutzer nach den x- und y-Koordinaten zweier Punkte auf der Linie und berechnet dann die Steigung und den y-Achsenabschnitt der Linie mit Hilfe der Formeln:
+// Lang erklärt 
+/* 
+Dieser Code definiert eine Klasse namens "Program", die eine Methode namens "Main" enthält. Das "Main"-Programm ist der Einstiegspunkt für jedes C#-Programm und wird automatisch ausgeführt, wenn das Programm gestartet wird.
 
-//m = (y2 - y1) / (x2 - x1)
+Innerhalb des "Main"-Programms wird zuerst eine boolsche Variable "repeat" definiert und auf "true" gesetzt. Diese Variable wird später verwendet, um zu entscheiden, ob das Programm wiederholt werden soll oder nicht.
 
-//b = y1 - m * x1
+Dann wird eine Schleife gestartet, die so lange läuft, wie "repeat" auf "true" gesetzt ist. Innerhalb der Schleife wird der Benutzer aufgefordert, die Koordinatenpunkte für eine lineare Funktion einzugeben. Das Programm überprüft dann, ob der Benutzer alle vier Koordinaten eingegeben hat, und gibt ansonsten eine Fehlermeldung aus und beginnt die Schleife erneut.
 
-//Dann gibt das Programm die berechneten Werte aus. Beachten Sie, dass dieses Programm keine Überprüfung auf ungültige Eingaben oder auf den Fall einer vertikalen Linie enthält.
-using System;
+Wenn alle Koordinaten eingegeben wurden, berechnet das Programm die Steigung und den y-Achsenabschnitt der Funktion und gibt sie aus. Dann wird der Benutzer gefragt, ob er den Code wiederholen möchte. Wenn der Benutzer "ja" eingibt, wird die Schleife erneut gestartet, andernfalls wird "repeat" auf "false" gesetzt und die Schleife wird beendet.
+
+Der Code verwendet die "Console"-Klasse, um Eingaben vom Benutzer entgegenzunehmen und Ausgaben auf der Konsole auszugeben. Der Code verwendet auch die "double.Parse()"-Funktion, um Benutzereingaben in Gleitkommazahlen umzuwandeln. Die "double.IsNaN()"-Funktion wird verwendet, um zu überprüfen, ob eine eingegebene Zahl eine gültige Zahl ist oder nicht.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+// kurz erklärt 
+/*
+-Der Code definiert eine Klasse namens "Program".
+-Das "Main"-Programm ist der Einstiegspunkt für das C#-Programm.
+-Eine boolsche Variable "repeat" wird definiert und auf "true" gesetzt.
+-Eine Schleife wird gestartet, die so lange läuft, wie "repeat" auf "true" gesetzt ist.
+-Der Benutzer wird aufgefordert, die Koordinatenpunkte für eine lineare Funktion einzugeben.
+-Das Programm überprüft, ob alle vier Koordinaten eingegeben wurden.
+-Wenn alle Koordinaten eingegeben wurden, berechnet das Programm die Steigung und den y-Achsenabschnitt der Funktion und gibt sie aus.
+-Der Benutzer wird gefragt, ob er den Code wiederholen möchte.
+-Wenn der Benutzer "ja" eingibt, wird die Schleife erneut gestartet.
+-Wenn der Benutzer "nein" eingibt, wird die Schleife beendet.
+-Der Code verwendet die "Console"-Klasse, um Eingaben vom Benutzer entgegenzunehmen und Ausgaben auf der Konsole auszugeben.
+-Die "double.Parse()"-Funktion wird verwendet, um Benutzereingaben in Gleitkommazahlen umzuwandeln.
+-Die "double.IsNaN()"-Funktion wird verwendet, um zu überprüfen, ob eine eingegebene Zahl eine gültige Zahl ist oder nicht.
+_________________________________________________________________________________________________________________________________________________
+*/
 
 class Program
 {
