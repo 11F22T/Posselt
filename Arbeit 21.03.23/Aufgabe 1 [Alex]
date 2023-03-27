@@ -44,8 +44,7 @@ class Program
                 continue;
             }
 
-            double m = (y2 - y1) / (x2 - x1); // Berechnung der Steigung
-            double b = y1 - m * x1; // Berechnung des y-Achsenabschnitts
+            CalculateLineProperties(x1, y1, x2, y2, out double m, out double b);
 
             Console.WriteLine("Die Steigung der Linie ist " + m);
             Console.WriteLine("Der y-Achsenabschnitt der Linie ist " + b);
@@ -56,4 +55,11 @@ class Program
             repeat = (answer.ToLower() == "ja");
         }
     }
+
+    static void CalculateLineProperties(double x1, double y1, double x2, double y2, out double m, out double b)
+    {
+        m = (y2 - y1) / (x2 - x1); // Berechnung der Steigung
+        b = y1 - m * x1; // Berechnung des y-Achsenabschnitts
+    }
 }
+
