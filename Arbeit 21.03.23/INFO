@@ -22,28 +22,35 @@ Wert ist. (Beispiel: MaximumSum wird mit dem Argument 9 aufgerufen. Dann soll al
 jedoch bereits größer als 9 ist. 6 ist damit der letzte Summenwert, der noch kleiner als 9 ist.)
 
 
-public class MaximumSum {
+using System;
 
-    public static void main(String[] args) {
+public class MaximumSum
+{
+    public static void Main(string[] args)
+    {
         int input = 9;
-        int result = maximumSum(input);
-        System.out.println("Das Ergebnis für die Eingabe " + input + " ist: " + result);
+        int result = CalculateMaximumSum(input);
+        Console.WriteLine("Das Ergebnis für die Eingabe " + input + " ist: " + result);
     }
 
-    public static int maximumSum(int n) {
-        if (n <= 0) {
+    public static int CalculateMaximumSum(int n)
+    {
+        if (n <= 0)
+        {
             return 0;
         }
-        
+
         int sum = 0;
         int i = 1;
-        
-        while (sum + i <= n) {
+
+        while (sum + i <= n)
+        {
             sum += i;
             i++;
         }
-        
+
         return sum;
     }
 }
+
 
