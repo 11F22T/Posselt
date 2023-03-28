@@ -1,7 +1,49 @@
-Aufgabe 1: Bitte erstelle ein Program welches mit einer Methode, die 2 Eingabewerte durch den Benutzer bekommt.
-Die Steigung und die y- Achsenabschnitt von einer Linearen Fuktion ermittelt...
-Ps: Es Muss mit einer out Methdoe ausgelagert werden da man mehr als 2 Rückgabewerte hat. 
+Erstelle den Quellcode für folgende Aufgabenstellungen. Bei sämtlichen Aufgabenstellungen han- delt es sich um Konsolenanwendungen, wobei die an die Methoden übergebenen Werte vom An- wender eingegeben werden sollen: a) Schreibe eine Methode „FktUntersuchung", die die Koordinaten von zwei Punkten übergeben
+
+bekommt. Die Methode soll die Steigung m und den y-Achsenabschnitt b bestimmen.
+
+Formeln:
+
+Allgemeine Form einer linearen Funktion: y = mx + b 2-Punkteform zur Berechnung der Steigung einer Funktionsgleichung:
+
+Beachte: Eine Parallele zur y-Achse ist keine Funktion!
+
+m = (y_{2} - y_{1})/(x_{2} - x_{1})
 _____________________________________________________________________________________________________________________________________________________________________
 
-Aufgabe 2: Lasse durch den Benutzer die gewünschte ereichende zahl eingeben. In einer ausgelagerten Methode soll 1+2+3 = 6 | 1+2+3+4= 10 gerechnet werden.
-Das Ergebnis dieser Rechnung darf niemals über 9 kommen. Da man nur mit natürlichen Zahlen Rechnen soll und das Erbenis genauso in diesem berech sein. 
+b) Schreibe eine Methode MaximumSum" die einen int-Wert als Argument nimmt und einen int- Wert zurückgibt. Für nicht-positive Eingaben soll die Methode direkt 0 als Ergebnis liefern. Bei positiven Eingaben soll so lange eine Aufsummierung der natürlichen Zahlen vorgenommen werden ( d .h 1+2 1 + 2 + 3 +...) bis die Summe den als Parameter übergebenen Wert erreicht oder überschreitet.
+
+Beispiel: Zurückgegeben werden soll der letzte Summenwert, der kleiner als der übergebene int-
+
+Wert ist. (Beispiel: MaximumSum wird mit dem Argument 9 aufgerufen. Dann soll als Ergebnis
+
+6 zurückgegeben werden, weil l + 2 + 3 = 6 und damit noch kleiner als 9 ist, 1 + 2 + 3 + 4 = 10
+
+jedoch bereits größer als 9 ist. 6 ist damit der letzte Summenwert, der noch kleiner als 9 ist.)
+
+
+public class MaximumSum {
+
+    public static void main(String[] args) {
+        int input = 9;
+        int result = maximumSum(input);
+        System.out.println("Das Ergebnis für die Eingabe " + input + " ist: " + result);
+    }
+
+    public static int maximumSum(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        
+        int sum = 0;
+        int i = 1;
+        
+        while (sum + i <= n) {
+            sum += i;
+            i++;
+        }
+        
+        return sum;
+    }
+}
+
