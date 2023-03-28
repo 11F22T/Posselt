@@ -4,45 +4,36 @@
 
 using System;
 
-namespace SummeBis9
+namespace TRY
 {
     class Program
     {
         static void Main(string[] args)
         {
-            if (args.Length == 0)
-            {
-                Console.WriteLine("Bitte geben Sie eine natürliche Zahl als Argument ein.");
-                return;
-            }
-
-            int eingabe;
-            if (!int.TryParse(args[0], out eingabe) || eingabe < 1)
-            {
-                Console.WriteLine("Bitte geben Sie eine gültige natürliche Zahl ein.");
-                return;
-            }
-
-            int summe = BerechneSummeBis9(eingabe);
-            Console.WriteLine($"Die Summe von 1 bis 9 (begrenzt durch {eingabe}) ist: {summe}");
+            //Einagbe
+            Console.WriteLine("Bitte Zahl eingeben");
+            int input = int.Parse(Console.ReadLine());
+            int result = CalculateMaximumSum(input);
+            Console.WriteLine("Das Ergebnis für die Eingabe " + input + " ist: " + result);
         }
 
-        static int BerechneSummeBis9(int grenze)
+        public static int CalculateMaximumSum(int n)
         {
-            int summe = 0;
-            for (int i = 1; i <= 9; i++)
+            if (n <= 0)
             {
-                if (summe + i <= grenze)
-                {
-                    summe += i;
-                }
-                else
-                {
-                    break;
-                }
+                return 0;
             }
 
-            return summe;
+            int sum = 0;
+            int i = 1;
+
+            while (sum + i <= n)
+            {
+                sum += i;
+                i++;
+            }
+
+            return sum;
         }
     }
 }
