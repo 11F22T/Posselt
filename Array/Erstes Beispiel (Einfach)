@@ -22,7 +22,11 @@ class Program
             {
                 Console.WriteLine($"Position {i + 1}: {zahlenArray[i]}");
             }
-
+            
+            //Abschied 
+            Console.WriteLine("Bis bald");
+            Console.WriteLine();
+            //-------------------------------------------------------------------------------------
 
 
             //Eingabe 
