@@ -1,0 +1,55 @@
+class Program
+    {
+        static void Main(string[] args)
+        {
+            //Eingabe 
+            Console.WriteLine("Wie viele Komponenten sollen im Array abgespeichert werden?");
+            int anzahlKomponenten = Convert.ToInt32(Console.ReadLine());
+
+            // Erschafftung eines Array 
+            int[] zahlenArray = new int[anzahlKomponenten];
+
+
+            // Einagebe Auforderungen für die geforderten Zahlen mit einer for schleife.
+            for (int i = 0; i < anzahlKomponenten; i++)
+            {
+                Console.WriteLine($"Geben Sie die Zahl für die Position {i + 1} ein:");
+                zahlenArray[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine("\nDie eingegebenen Zahlen sind:");
+            for (int i = 0; i < zahlenArray.Length; i++)
+            {
+                Console.WriteLine($"Position {i + 1}: {zahlenArray[i]}");
+            }
+
+
+
+            //Eingabe 
+            //int.Pars konvertiert in Ganzahl, ist das geleiche wie convert...
+            Console.WriteLine("Wie viele Komponenten sollen im Array abgespeichert werden?");
+            int anzahlKomponenten2 = int.Parse(Console.ReadLine());
+
+            // Erschafftung eines Array 
+            int[] zahlenArray2 = new int[anzahlKomponenten2];
+
+            // Einagebe Auforderungen für die geforderten Zahlen mit einer for schleife.
+            for (int i = 0; i < anzahlKomponenten2; i++)
+            {
+                Console.WriteLine($"Geben Sie die Zahl für die Position {i + 1} ein:");
+                zahlenArray2[i] = int.Parse(Console.ReadLine());
+            }
+
+            // Ausgabe der zahlen die eingegeben wurden durch eine foreach schleife.
+            // \n sorgt dafür das bei einem neuen Durchlauf eine Zeile weiter nach unten gesprungen wird...
+            Console.WriteLine("\nDie eingegebenen Zahlen sind:");
+            int position = 1;
+            foreach (int zahl in zahlenArray2)
+            {
+                Console.WriteLine($"Position {position}: {zahl}");
+                position++;
+            }
+
+           
+        }
+    }
