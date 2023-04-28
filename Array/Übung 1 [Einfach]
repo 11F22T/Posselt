@@ -10,9 +10,16 @@ namespace HotelPreisberechnung
             string[] saisonNamen = { "Frühling", "Sommer", "Herbst", "Winter" };
             int[] saisonPreise = { 60, 70, 80, 65 };
 
+            // Anzeigen der Preise für jede Saison
+            Console.WriteLine("Preise pro Nacht für die Saisons:");
+            for (int i = 0; i < saisonNamen.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {saisonNamen[i]}: {saisonPreise[i]}€");
+            }
+
             // Aufforderung zur Eingabe der Saison und Speichern der Eingabe
-            Console.WriteLine("Geben Sie die Saison ein (Frühling, Sommer, Herbst oder Winter):");
-            string eingegebeneSaison = Console.ReadLine();
+            Console.WriteLine("Wählen Sie die Saison durch Eingabe der entsprechenden Zahl (1-4):");
+            int eingegebeneSaisonIndex = int.Parse(Console.ReadLine()) - 1;
 
             // Aufforderung zur Eingabe der Anzahl der Personen und Speichern der Eingabe
             Console.WriteLine("Geben Sie die Anzahl der Personen ein:");
@@ -22,20 +29,18 @@ namespace HotelPreisberechnung
             Console.WriteLine("Geben Sie die Anzahl der Nächte ein:");
             int anzahlNaechte = int.Parse(Console.ReadLine());
 
-            // Finden des Indexes der eingegebenen Saison im saisonNamen-Array
-            int index = Array.IndexOf(saisonNamen, eingegebeneSaison);
-
             // Überprüfen, ob die eingegebene Saison gültig ist
-            if (index != -1)
+            if (eingegebeneSaisonIndex >= 0 && eingegebeneSaisonIndex < saisonNamen.Length)
             {
                 // Abrufen des Preises pro Nacht für die eingegebene Saison aus dem saisonPreise-Array
-                int preisProNacht = saisonPreise[index];
+                int preisProNacht = saisonPreise[eingegebeneSaisonIndex];
+                string eingegebeneSaison = saisonNamen[eingegebeneSaisonIndex];
 
                 // Berechnen des Gesamtpreises
                 int gesamtPreis = preisProNacht * anzahlPersonen * anzahlNaechte;
 
                 // Ausgabe der berechneten Informationen
-                Console.WriteLine($"\nSaison: {eingegebeneSaison}");
+                Console.WriteLine($"Saison: {eingegebeneSaison}");
                 Console.WriteLine($"Preis pro Nacht: {preisProNacht}€");
                 Console.WriteLine($"Anzahl der Personen: {anzahlPersonen}");
                 Console.WriteLine($"Anzahl der Nächte: {anzahlNaechte}");
