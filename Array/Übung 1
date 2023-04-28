@@ -6,24 +6,35 @@ namespace HotelPreisberechnung
     {
         static void Main(string[] args)
         {
+            // Deklarieren und Initialisieren der Arrays für Saisonnamen und Saisonpreise
             string[] saisonNamen = { "Frühling", "Sommer", "Herbst", "Winter" };
             int[] saisonPreise = { 60, 70, 80, 65 };
 
+            // Aufforderung zur Eingabe der Saison und Speichern der Eingabe
             Console.WriteLine("Geben Sie die Saison ein (Frühling, Sommer, Herbst oder Winter):");
             string eingegebeneSaison = Console.ReadLine();
 
+            // Aufforderung zur Eingabe der Anzahl der Personen und Speichern der Eingabe
             Console.WriteLine("Geben Sie die Anzahl der Personen ein:");
             int anzahlPersonen = int.Parse(Console.ReadLine());
 
+            // Aufforderung zur Eingabe der Anzahl der Nächte und Speichern der Eingabe
             Console.WriteLine("Geben Sie die Anzahl der Nächte ein:");
             int anzahlNaechte = int.Parse(Console.ReadLine());
 
+            // Finden des Indexes der eingegebenen Saison im saisonNamen-Array
             int index = Array.IndexOf(saisonNamen, eingegebeneSaison);
+
+            // Überprüfen, ob die eingegebene Saison gültig ist
             if (index != -1)
             {
+                // Abrufen des Preises pro Nacht für die eingegebene Saison aus dem saisonPreise-Array
                 int preisProNacht = saisonPreise[index];
+
+                // Berechnen des Gesamtpreises
                 int gesamtPreis = preisProNacht * anzahlPersonen * anzahlNaechte;
 
+                // Ausgabe der berechneten Informationen
                 Console.WriteLine($"\nSaison: {eingegebeneSaison}");
                 Console.WriteLine($"Preis pro Nacht: {preisProNacht}€");
                 Console.WriteLine($"Anzahl der Personen: {anzahlPersonen}");
@@ -32,6 +43,7 @@ namespace HotelPreisberechnung
             }
             else
             {
+                // Fehlermeldung bei ungültiger Saisoneingabe
                 Console.WriteLine("Ungültige Saison eingegeben. Bitte geben Sie eine gültige Saison ein.");
             }
         }
