@@ -53,6 +53,19 @@ class Program
                 Console.WriteLine($"Position {position}: {zahl}");
                 position++;
             }
+            // Berechnung des Durchschnitts
+             // Berechnung des Durchschnitts
+double summe = 0;
+foreach (int zahl in zahlenArray2)
+{
+    summe += zahl;
+}
+double durchschnitt = summe / zahlenArray2.Length;
+
+// Ausgabe des Durchschnitts
+Console.WriteLine($"\nDer Durchschnitt der eingegebenen Zahlen ist: {durchschnitt}");
+
+
 
            
         }
