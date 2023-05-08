@@ -1,0 +1,60 @@
+using System;
+
+namespace Try
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Definiere die Saison-Namen und Preise pro Nacht
+            string[] Zeiten = { "Frühling", "Sommer", "Herbst", "Winter" };
+            int[] Preise = { 60, 70, 80, 65 };
+
+            // Fordere Benutzereingaben an und speichere sie in Variablen
+            int Zeit = ReadInt("Bitte Saison 1-4 eingeben: ", 1, 4) - 1;
+            int Personen = ReadInt("Bitte geben sie Anzahl der Personen ein: ", 1, 100);
+            int Naechte = ReadInt("Wie viele Nächte bleiben sie: ", 1, 100);
+
+            // Berechne den Gesamtpreis und die ausgewählte Saison
+            (double gesamtPreis, string Saison) = Preisberechnung(Preise, Personen, Naechte, Zeit, Zeiten);
+
+            // Gebe den Gesamtpreis und die ausgewählte Saison aus
+            Console.WriteLine("Ihr gesamtPreis ist: " + gesamtPreis);
+            Console.WriteLine("Ausgewählte Saison ist: " + Saison);
+        }
+
+        // Eine Methode, um eine Zahl innerhalb eines bestimmten Bereichs von der Benutzereingabe zu erhalten
+        private static int ReadInt(string text, int min, int max)
+        {
+            int value;
+            while (true)
+            {
+                // Zeige den Text an, um den Benutzer zur Eingabe aufzufordern
+                Console.Write(text);
+                // Prüfe, ob die Eingabe eine gültige Zahl ist und ob sie innerhalb des angegebenen Bereichs liegt
+                if (int.TryParse(Console.ReadLine(), out value) && value >= min && value <= max)
+                {
+                    break; // Wenn die Eingabe gültig ist, beende die Schleife
+                }
+                // Gebe eine Fehlermeldung aus, wenn die Eingabe ungültig ist
+                Console.WriteLine($"Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen {min} und {max} ein.");
+            }
+            return value; // Gebe den validen Wert zurück
+        }
+
+        // Eine Methode zur Berechnung des Gesamtpreises und zum Abrufen der ausgewählten Saison
+        private static (double, string) Preisberechnung(int[] Preise, int Personen, int Naechte, int Zeit, string[] Zeiten)
+        {
+            // Hole den Preis pro Nacht für die ausgewählte Saison und den Saison-Namen
+            int Preis = Preise[Zeit];
+            string Saison = Zeiten[Zeit];
+
+            // Berechne den Gesamtpreis einschließlich Mehrwertsteuer (19%)
+            double gesamtpreiskomma = Naechte * Personen * Preis * 1.19;
+            double gesamtPreis = Math.Round(gesamtpreiskomma, 2);
+
+            // Gebe den Gesamtpreis und die ausgewählte Saison als Tuple zurück
+            return (gesamtPreis, Saison);
+        }
+    }
+}
