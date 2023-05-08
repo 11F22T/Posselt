@@ -1,0 +1,47 @@
+/*Hier ist eine einfache Übungsaufgabe, die Sie in C# programmieren können:
+
+Aufgabe: Erstellen Sie ein Programm, das die Fakultät einer eingegebenen Zahl berechnet.
+
+Anforderungen:
+
+Fordern Sie den Benutzer auf, eine positive Ganzzahl einzugeben.
+Überprüfen Sie, ob die eingegebene Zahl gültig und positiv ist.
+Berechnen Sie die Fakultät der eingegebenen Zahl.
+Geben Sie das Ergebnis auf dem Bildschirm aus.
+Hinweis: Die Fakultät einer Zahl n (geschrieben als n!) ist das Produkt aller Ganzzahlen von 1 bis n. Zum Beispiel ist 5! = 5 * 4 * 3 * 2 * 1 = 120. */
+
+using System;
+
+namespace Try
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Willkommen beim Programm Fakultät");
+
+            int eingabe = 0;
+            int ergebnis = 1; // Startwert ist 1, da jede Fakultät mit 1 beginnt
+            
+            Console.WriteLine("Bitte geben Sie eine Zahl ein, deren Fakultät Sie berechnen wollen:");
+
+            if (int.TryParse(Console.ReadLine(), out eingabe) && eingabe > 1)
+            {
+                // Fakultät berechnen
+                for (int i = 1; i <= eingabe; i++)
+                {
+                    ergebnis *= i;
+                }
+
+                Console.WriteLine($"Die Fakultät von {eingabe} ist {ergebnis}.");
+            }
+            else
+            {
+                Console.WriteLine("Ungültige Eingabe. Bitte geben Sie eine natürliche Zahl größer als 1 ein.");
+            }
+        }
+
+
+    }
+}
+
