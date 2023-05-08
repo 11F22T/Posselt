@@ -1,0 +1,47 @@
+/* Schreiben Sie ein Programm, das eine zufällige Zahl zwischen 1 und 100 generiert und den Benutzer auffordert, diese Zahl zu erraten.
+Das Programm sollte dem Benutzer Feedback geben, ob seine Vermutung zu hoch oder zu niedrig ist, bis er die richtige Zahl erraten hat.
+Das Programm sollte auch die Anzahl der Versuche zählen und am Ende die Anzahl der Versuche ausgeben. Verwenden Sie Schleifen und Verzweigungen, um das Programm zu schreiben. */
+using System;
+
+namespace Ratespiel
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Zufallszahl generieren
+            Random zufall = new Random();
+            int zufallszahl = zufall.Next(1, 101);
+
+            // Spielbeginn
+            Console.WriteLine("Willkommen beim Zahlenraten!");
+
+            int eingabe = 0;
+            int versuche = 0;
+
+            // Schleife, bis die richtige Zahl geraten wurde
+            while (eingabe != zufallszahl)
+            {
+                // Benutzereingabe abfragen
+                Console.Write("Bitte geben Sie eine Zahl zwischen 1 und 100 ein: ");
+                eingabe = int.Parse(Console.ReadLine());
+
+                // Feedback geben, ob die geratene Zahl zu hoch oder zu niedrig ist
+                if (eingabe < zufallszahl)
+                {
+                    Console.WriteLine("Zu niedrig! Versuchen Sie es erneut.");
+                }
+                else if (eingabe > zufallszahl)
+                {
+                    Console.WriteLine("Zu hoch! Versuchen Sie es erneut.");
+                }
+
+                // Versuche zählen
+                versuche++;
+            }
+
+            // Ausgabe des Ergebnisses
+            Console.WriteLine("Glückwunsch, Sie haben die Zahl in " + versuche + " Versuchen erraten!");
+        }
+    }
+}
