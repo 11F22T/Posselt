@@ -37,7 +37,7 @@ namespace HotelPreisberechnung
                 string eingegebeneSaison = saisonNamen[eingegebeneSaisonIndex];
 
                 // Berechnen des Gesamtpreises
-                int gesamtPreis = preisProNacht * anzahlPersonen * anzahlNaechte;
+                int gesamtPreis = preisProNacht * anzahlPersonen * anzahlNaechte * 1.19;
 
                 // Ausgabe der berechneten Informationen
                 Console.WriteLine($"Saison: {eingegebeneSaison}");
