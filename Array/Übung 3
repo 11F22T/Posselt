@@ -1,18 +1,21 @@
 using System;
 
-namespace ArrayUebung
+namespace TRY
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int[] zahlen = new int[10];
+
+            //Einagbe 
+
+            int[] zahlen = new int[100];
             Random rand = new Random();
 
             // Array mit Zufallszahlen füllen
             for (int i = 0; i < zahlen.Length; i++)
             {
-                zahlen[i] = rand.Next(1, 101);
+                zahlen[i] = rand.Next(1, 21);
             }
 
             // Berechnungen
@@ -20,7 +23,33 @@ namespace ArrayUebung
             int maximum = int.MinValue;
             int minimum = int.MaxValue;
             double durchschnitt;
+            string istZahl = " "; 
+            int lol = 0;
+            int zählen1 = 0;
+            int zählen2 = 0;
+            int zählen3 = 0;
+            int zählen4 = 0;
+            int zählen5 = 0;
+            int zählen5 = 0;
+            int zählen6 = 0;
+            int zählen7 = 0;
+            int zählen8 = 0;
+            int zählen8 = 0;
+            int zählen9 = 0;
+            int zählen10 = 0;
+            int zählen11 = 0;
+            int zählen12 = 0;
+            int zählen13 = 0;
+            int zählen14 = 0;
+            int zählen15 = 0;
+            int zählen16 = 0;
+            int zählen17 = 0;
+            int zählen18 = 0;
+            int zählen19 = 0;
+            int zählen20 = 0;
 
+
+            int zählen1 = 0;
             for (int i = 0; i < zahlen.Length; i++)
             {
                 summe += zahlen[i];
@@ -31,6 +60,10 @@ namespace ArrayUebung
                 if (zahlen[i] < minimum)
                 {
                     minimum = zahlen[i];
+                }
+                if (zahlen[i] == 6)
+                {
+                    lol++;
                 }
             }
             durchschnitt = (double)summe / zahlen.Length;
@@ -43,11 +76,48 @@ namespace ArrayUebung
             }
             Console.WriteLine("\n");
 
+            Console.WriteLine("Frage nach na zahl du ....");
+            int eingabe = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < zahlen.Length; i++)
+            {
+                if (zahlen[i] == eingabe)
+                {
+                    istZahl = "true";
+                }
+
+                switch (zahlen[i])
+                {
+                    case 1:
+                        zählen1++;
+                        break;
+
+                    case 2:
+                        zählen1++;
+                        break;
+
+                    case 3:
+                        zählen1++;
+                        break;
+
+                    case 4:
+                        zählen1++;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            
+
+
             // Ausgabe der berechneten Ergebnisse
             Console.WriteLine($"Summe: {summe}");
             Console.WriteLine($"Durchschnitt: {durchschnitt}");
             Console.WriteLine($"Maximum: {maximum}");
             Console.WriteLine($"Minimum: {minimum}");
+            Console.WriteLine(lol);
+            Console.WriteLine(istZahl);
         }
     }
 }
