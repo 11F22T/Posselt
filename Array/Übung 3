@@ -1,0 +1,53 @@
+using System;
+
+namespace ArrayUebung
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] zahlen = new int[10];
+            Random rand = new Random();
+
+            // Array mit Zufallszahlen füllen
+            for (int i = 0; i < zahlen.Length; i++)
+            {
+                zahlen[i] = rand.Next(1, 101);
+            }
+
+            // Berechnungen
+            int summe = 0;
+            int maximum = int.MinValue;
+            int minimum = int.MaxValue;
+            double durchschnitt;
+
+            for (int i = 0; i < zahlen.Length; i++)
+            {
+                summe += zahlen[i];
+                if (zahlen[i] > maximum)
+                {
+                    maximum = zahlen[i];
+                }
+                if (zahlen[i] < minimum)
+                {
+                    minimum = zahlen[i];
+                }
+            }
+            durchschnitt = (double)summe / zahlen.Length;
+
+            // Ausgabe der Array-Werte
+            Console.WriteLine("Array-Werte:");
+            for (int i = 0; i < zahlen.Length; i++)
+            {
+                Console.Write(zahlen[i] + " ");
+            }
+            Console.WriteLine("\n");
+
+            // Ausgabe der berechneten Ergebnisse
+            Console.WriteLine($"Summe: {summe}");
+            Console.WriteLine($"Durchschnitt: {durchschnitt}");
+            Console.WriteLine($"Maximum: {maximum}");
+            Console.WriteLine($"Minimum: {minimum}");
+        }
+    }
+}
