@@ -55,18 +55,15 @@ class Program
             }
             // Berechnung des Durchschnitts
              // Berechnung des Durchschnitts
-double summe = 0;
-foreach (int zahl in zahlenArray2)
-{
-    summe += zahl;
-}
-double durchschnitt = summe / zahlenArray2.Length;
+             
+             double summe = 0;
+             foreach (int zahl in zahlenArray2)
+             {
+                summe += zahl;
+             }
+             double durchschnitt = summe / zahlenArray2.Length;
 
-// Ausgabe des Durchschnitts
-Console.WriteLine($"\nDer Durchschnitt der eingegebenen Zahlen ist: {durchschnitt}");
-
-
-
-           
+            // Ausgabe des Durchschnitts
+            Console.WriteLine($"\nDer Durchschnitt der eingegebenen Zahlen ist: {durchschnitt}");
         }
     }
