@@ -24,18 +24,18 @@ namespace TRY
                 zahlenArray[i] = random.Next(min, max + 1);
             }
 
-            // Initialisiere Variablen für kleinste und größte Zahlen und deren Indizes im Array
+            // Initialisiere Variablen für kleinste und größte Zahlen und deren Indizes(An welcher Stelle) im Array
             int kleinsteZahl = zahlenArray[0], groessteZahl = zahlenArray[0], kleinsteZahlIndex = 0, groessteZahlIndex = 0;
 
             // Initialisiere eine Variable für die Summe der Zahlen im Array
             int summe = 0;
 
-            // Durchlaufe das Array, um kleinste, größte Zahlen und deren Indizes, Summe der Zahlen und Häufigkeit jeder Zahl zu finden
+            // Durchlaufe das Array, um kleinste, größte Zahlen und deren Indizes(An welcher Stelle), Summe der Zahlen und Häufigkeit jeder Zahl zu finden
             for (int i = 0; i < arrayLength; i++)
             {
                 int zahl = zahlenArray[i];
 
-                // Aktualisiere kleinste und größte Zahlen und deren Indizes, falls erforderlich
+                // Aktualisiere kleinste und größte Zahlen und deren Indizes(An welcher Stelle), falls erforderlich
                 if (zahl < kleinsteZahl)
                 {
                     kleinsteZahl = zahl;
@@ -54,12 +54,16 @@ namespace TRY
                 haeufigkeit[zahl]++;
             }
 
-            // Gebe die kleinste und größte Zahl und deren Indizes im Array aus
+            // Gebe die kleinste und größte Zahl und deren Indizes(An welcher stelle) im Array aus
             Console.WriteLine($"Kleinste Zahl: {kleinsteZahl} (Index: {kleinsteZahlIndex})");
             Console.WriteLine($"Größte Zahl: {groessteZahl} (Index: {groessteZahlIndex})");
 
             // Gebe die Summe der Zahlen im Array aus
             Console.WriteLine($"Summe der Zahlen: {summe}");
+
+            // Berechne den Durchschnitt der Zahlen im Array und gebe ihn aus
+            double durchschnitt = (double)summe / arrayLength;
+            Console.WriteLine($"Durchschnitt der Zahlen im Array: {durchschnitt}");
 
             // Gebe die Häufigkeit jeder Zahl zwischen min und max (einschließlich) aus
             Console.WriteLine("Häufigkeit der Zahlen:");
@@ -79,11 +83,6 @@ namespace TRY
             {
                 Console.WriteLine($"Die Zahl {suchZahl} kommt im Array nicht vor.");
             }
-
-            // Berechne den Durchschnitt der Zahlen im Array und gebe ihn aus
-            double durchschnitt = (double)summe / arrayLength;
-            Console.WriteLine($"Durchschnitt der Zahlen im Array: {durchschnitt}");
         }
-
     }
 }
