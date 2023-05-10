@@ -1,77 +1,89 @@
+using System;
+
+namespace TRY
 {
-    // Definiere Konstanten für Array-Länge, minimale und maximale Zahlen
-    const int arrayLength = 100;
-    const int min = 1;
-    const int max = 20;
-    
-    // Erstelle ein Array zum Speichern der Zufallszahlen und ein Array zur Erfassung der Häufigkeit jeder Zahl
-    int[] zahlenArray = new int[arrayLength];
-    int[] haeufigkeit = new int[max + 1];
-    
-    // Erstelle ein Random-Objekt, um Zufallszahlen zu generieren
-    Random random = new Random();
-
-    // Fülle das Array mit Zufallszahlen zwischen min und max (einschließlich)
-    for (int i = 0; i < arrayLength; i++)
+    class Program
     {
-        zahlenArray[i] = random.Next(min, max + 1);
-    }
-
-    // Initialisiere Variablen für kleinste und größte Zahlen und deren Indizes im Array
-    int kleinsteZahl = zahlenArray[0], groessteZahl = zahlenArray[0], kleinsteZahlIndex = 0, groessteZahlIndex = 0;
-
-    // Initialisiere eine Variable für die Summe der Zahlen im Array
-    int summe = 0;
-
-    // Durchlaufe das Array, um kleinste, größte Zahlen und deren Indizes, Summe der Zahlen und Häufigkeit jeder Zahl zu finden
-    for (int i = 0; i < arrayLength; i++)
-    {
-        int zahl = zahlenArray[i];
-
-        // Aktualisiere kleinste und größte Zahlen und deren Indizes, falls erforderlich
-        if (zahl < kleinsteZahl)
+        static void Main(string[] args)
         {
-            kleinsteZahl = zahl;
-            kleinsteZahlIndex = i;
+            // Definiere Konstanten für Array-Länge, minimale und maximale Zahlen
+            const int arrayLength = 100;
+            const int min = 1;
+            const int max = 20;
+
+            // Erstelle ein Array zum Speichern der Zufallszahlen und ein Array zur Erfassung der Häufigkeit jeder Zahl
+            int[] zahlenArray = new int[arrayLength];
+            int[] haeufigkeit = new int[max + 1];
+
+            // Erstelle ein Random-Objekt, um Zufallszahlen zu generieren
+            Random random = new Random();
+
+            // Fülle das Array mit Zufallszahlen zwischen min und max (einschließlich)
+            for (int i = 0; i < arrayLength; i++)
+            {
+                zahlenArray[i] = random.Next(min, max + 1);
+            }
+
+            // Initialisiere Variablen für kleinste und größte Zahlen und deren Indizes im Array
+            int kleinsteZahl = zahlenArray[0], groessteZahl = zahlenArray[0], kleinsteZahlIndex = 0, groessteZahlIndex = 0;
+
+            // Initialisiere eine Variable für die Summe der Zahlen im Array
+            int summe = 0;
+
+            // Durchlaufe das Array, um kleinste, größte Zahlen und deren Indizes, Summe der Zahlen und Häufigkeit jeder Zahl zu finden
+            for (int i = 0; i < arrayLength; i++)
+            {
+                int zahl = zahlenArray[i];
+
+                // Aktualisiere kleinste und größte Zahlen und deren Indizes, falls erforderlich
+                if (zahl < kleinsteZahl)
+                {
+                    kleinsteZahl = zahl;
+                    kleinsteZahlIndex = i;
+                }
+                if (zahl > groessteZahl)
+                {
+                    groessteZahl = zahl;
+                    groessteZahlIndex = i;
+                }
+
+                // Aktualisiere die Summe der Zahlen
+                summe += zahl;
+
+                // Aktualisiere die Häufigkeit der aktuellen Zahl
+                haeufigkeit[zahl]++;
+            }
+
+            // Gebe die kleinste und größte Zahl und deren Indizes im Array aus
+            Console.WriteLine($"Kleinste Zahl: {kleinsteZahl} (Index: {kleinsteZahlIndex})");
+            Console.WriteLine($"Größte Zahl: {groessteZahl} (Index: {groessteZahlIndex})");
+
+            // Gebe die Summe der Zahlen im Array aus
+            Console.WriteLine($"Summe der Zahlen: {summe}");
+
+            // Gebe die Häufigkeit jeder Zahl zwischen min und max (einschließlich) aus
+            Console.WriteLine("Häufigkeit der Zahlen:");
+            for (int i = min; i <= max; i++)
+            {
+                Console.WriteLine($"Zahl {i}: {haeufigkeit[i]} mal");
+            }
+
+            // Lese eine Zahl von der Tastatur ein und überprüfe, ob sie im Array vorkommt
+            Console.Write("Geben Sie eine Zahl ein, um zu überprüfen, ob sie im Array vorkommt: ");
+            int suchZahl = int.Parse(Console.ReadLine());
+            if (haeufigkeit[suchZahl] > 0)
+            {
+                Console.WriteLine($"Die Zahl {suchZahl} kommt im Array vor.");
+            }
+            else
+            {
+                Console.WriteLine($"Die Zahl {suchZahl} kommt im Array nicht vor.");
+            }
+
+            // Berechne den Durchschnitt der Zahlen im Array und gebe ihn aus
+            double durchschnitt = (double)summe / arrayLength;
+            Console.WriteLine($"Durchschnitt der Zahlen im Array: {durchschnitt}");
         }
-        if (zahl > groessteZahl)
-        {
-            groessteZahl = zahl;
-            groessteZahlIndex = i;
-        }
 
-        // Aktualisiere die Summe der Zahlen
-        summe += zahl;
-
-        // Aktualisiere die Häufigkeit der aktuellen Zahl
-        haeufigkeit[zahl]++;
     }
-
-    // Gebe die kleinste und größte Zahl und deren Indizes im Array aus
-    Console.WriteLine($"Kleinste Zahl: {kleinsteZahl} (Index: {kleinsteZahlIndex})");
-    Console.WriteLine($"Größte Zahl: {groessteZahl} (Index: {groessteZahlIndex})");
-
-    // Gebe die Summe der Zahlen im Array aus
-    Console.WriteLine($"Summe der Zahlen: {summe}");
-
-    // Gebe die Häufigkeit jeder Zahl zwischen min und max (einschließlich) aus
-    Console.WriteLine("Häufigkeit der Zahlen:");
-    for (int i = min; i <= max; i++)
-    {
-        Console.WriteLine($"Zahl {i}: {haeufigkeit[i]} mal");
-    }
-
-    // Lese eine Zahl von der Tastatur ein und überprüfe, ob sie im Array vorkommt
-    Console.Write("Geben Sie eine Zahl ein, um zu überprüfen, ob sie im Array vorkommt: ");
-    int suchZahl = int.Parse(Console.ReadLine());
-    if (haeufigkeit[suchZahl] > 0)
-    {
-        Console.WriteLine($"Die Zahl {suchZahl} kommt im Array vor.");
-    }
-    else
-    // Berechne den Durchschnitt der Zahlen im Array und gebe ihn aus
-    double durchschnitt = (double)summe / arrayLength;
-    Console.WriteLine($"Durchschnitt der Zahlen im Array: {durchschnitt}");
-    {
-    Console.WriteLine($"Die Zahl {suchZahl} kommt im Array nicht vor.");
-    }
+}
