@@ -1,4 +1,57 @@
-INFO
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+(Bubble-Sort-Methode)
+Die Bubble-Sort-Methode ist ein einfacher Sortieralgorithmus, der auf Vergleichen und Vertauschen von Elementen basiert.
+Der Algorithmus durchläuft das zu sortierende Array wiederholt, vergleicht benachbarte Elemente und tauscht sie aus, wenn sie in der falschen Reihenfolge sind. Dieser Prozess wird so lange wiederholt, bis das gesamte Array sortiert ist.
+
+Hier ist eine Erklärung der Bubble-Sort-Methode:
+
+1. Gehe das Array von links nach rechts durch und vergleiche jeweils zwei benachbarte Elemente.
+2. Wenn das linke Element größer als das rechte Element ist, tausche sie miteinander.
+3. Gehe zum nächsten Paar von Elementen und wiederhole den Vergleich und den Tauschprozess.
+4. Wiederhole diesen Vorgang für alle Elemente im Array, bis das größte Element an die letzte Position wandert.
+5. Reduziere den Bereich, in dem Vergleiche und Tausche stattfinden müssen, um das bereits sortierte Element am Ende des Arrays auszuschließen.
+6. Wiederhole die Schritte 1-5, bis das gesamte Array sortiert ist.
+
+Der Name "Bubble Sort" leitet sich von der Idee ab, dass die größten Elemente allmählich wie Blasen an die richtige Position "aufsteigen".
+Der Algorithmus arbeitet durch wiederholtes "Aufsteigen" der größten Elemente von links nach rechts.
+
+Die Bubble-Sort-Methode hat eine durchschnittliche und schlechteste Fallkomplexität von O(n^2), was bedeutet, dass die Anzahl der Vergleiche und Tauschoperationen quadratisch mit der Größe des Arrays wächst.
+Daher ist der Algorithmus nicht effizient für große Arrays. Es ist eher eine einfache Sortiermethode, die in Bildungs- oder Lernzwecken verwendet wird oder wenn die Eingabe bereits teilweise sortiert ist.
+
+{Code Beispiel}
+
+int[] array = { 5, 2, 8, 12, 3 };
+
+Console.WriteLine("Unsortiertes Array: ");
+foreach (int element in array)
+{
+    Console.Write(element + " ");
+}
+
+BubbleSort(array);
+
+Console.WriteLine("\nSortiertes Array: ");
+foreach (int element in array)
+{
+    Console.Write(element + " ");
+}
+
+int[] array = { 5, 2, 8, 12, 3 };
+
+Console.WriteLine("Unsortiertes Array: ");
+foreach (int element in array)
+{
+    Console.Write(element + " ");
+}
+
+BubbleSort(array);
+
+Console.WriteLine("\nSortiertes Array: ");
+foreach (int element in array)
+{
+    Console.Write(element + " ");
+}
+
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 (Übung 3)
