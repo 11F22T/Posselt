@@ -1,4 +1,8 @@
+// Systembestandteile die genutzt werden...
 using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace TRY
 {
@@ -57,13 +61,18 @@ namespace TRY
             // Gebe die kleinste und größte Zahl und deren Indizes(An welcher stelle) im Array aus
             Console.WriteLine($"Kleinste Zahl: {kleinsteZahl} (Index: {kleinsteZahlIndex})");
             Console.WriteLine($"Größte Zahl: {groessteZahl} (Index: {groessteZahlIndex})");
+            Console.WriteLine();
 
             // Gebe die Summe der Zahlen im Array aus
             Console.WriteLine($"Summe der Zahlen: {summe}");
 
+            Console.WriteLine();
+
             // Berechne den Durchschnitt der Zahlen im Array und gebe ihn aus
             double durchschnitt = (double)summe / arrayLength;
             Console.WriteLine($"Durchschnitt der Zahlen im Array: {durchschnitt}");
+
+            Console.WriteLine();
 
             // Gebe die Häufigkeit jeder Zahl zwischen min und max (einschließlich) aus
             Console.WriteLine("Häufigkeit der Zahlen:");
@@ -71,6 +80,22 @@ namespace TRY
             {
                 Console.WriteLine($"Zahl {i}: {haeufigkeit[i]} mal");
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Sotierung des Arrays");
+            //Sortieren des Arrays 
+
+            Array.Sort(zahlenArray);
+
+            //ausgabe 
+
+            foreach (var zahl in zahlenArray)
+            {
+                Console.Write($"{zahl},");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
 
             // Lese eine Zahl von der Tastatur ein und überprüfe, ob sie im Array vorkommt
             Console.Write("Geben Sie eine Zahl ein, um zu überprüfen, ob sie im Array vorkommt: ");
@@ -86,3 +111,4 @@ namespace TRY
         }
     }
 }
+
