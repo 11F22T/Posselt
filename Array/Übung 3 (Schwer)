@@ -2,15 +2,10 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        // Abfrage der Array-Länge und der Zahlenspanne
+        // Eingabe
         Console.Write("Geben Sie die gewünschte Länge des Arrays ein: ");
-        int arrayLength = HoleGanzzahlVomBenutzer();
-
-        Console.Write("Geben Sie die kleinste mögliche Zahl ein: ");
-        int min = HoleGanzzahlVomBenutzer();
-
-        Console.Write("Geben Sie die größte mögliche Zahl ein: ");
-        int max = HoleGanzzahlVomBenutzer();
+        int arrayLength = HoleGanzzahlVomBenutzer(1, 1000);
+        (int min, int max) = HoleMinUndMaxVomBenutzer();
 
         // Aufruf
         int[] zahlenArray = GeneriereArray(arrayLength, min, max);
@@ -29,71 +24,118 @@ internal class Program
 
     private static int[] GeneriereArray(int laenge, int min, int max)
     {
+        // Erzeugt eine Instanz der Klasse Random, um Zufallszahlen zu generieren
         Random random = new Random();
+
+        // Erzeugt ein neues Array mit der gegebenen Länge, um die generierten Zahlen zu speichern
         int[] array = new int[laenge];
+
+        // Füllt das Array mit Zufallszahlen im gegebenen Bereich
         for (int i = 0; i < laenge; i++)
         {
             array[i] = random.Next(min, max + 1);
         }
+
+        // Sortiert das Array in aufsteigender Reihenfolge
         Array.Sort(array);
+
+        // Gibt das generierte Array zurück
         return array;
     }
 
     private static void AusgabeArrayUndHaeufigkeit(int[] array)
     {
+        // Erzeugt ein Wörterbuch zur Speicherung der Häufigkeit der Zahlen im Array
         Dictionary<int, int> haeufigkeit = new Dictionary<int, int>();
 
+        // Gibt eine Überschrift aus
         Console.WriteLine("Inhalt des Arrays:");
+
+        // Durchläuft das Array und gibt jede Zahl aus
         foreach (int zahl in array)
         {
             Console.Write(zahl + " ");
 
+            // Überprüft, ob die Zahl bereits im Wörterbuch vorhanden ist
             if (haeufigkeit.ContainsKey(zahl))
             {
+                // Inkrementiert die Häufigkeit der Zahl im Wörterbuch
                 haeufigkeit[zahl]++;
             }
             else
             {
+                // Fügt die Zahl mit einer Häufigkeit von 1 zum Wörterbuch hinzu
                 haeufigkeit[zahl] = 1;
             }
         }
-
+        // Gibt eine leere Zeile aus
         Console.WriteLine();
+
+        // Gibt eine Trennlinie aus
         Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
+        // Gibt eine Überschrift aus
         Console.WriteLine("Häufigkeit jeder Zahl:");
+
+        // Durchläuft das Wörterbuch und gibt jede Zahl und ihre Häufigkeit aus
         foreach (var pair in haeufigkeit)
         {
             Console.WriteLine($"Zahl {pair.Key}: {pair.Value} mal");
         }
+
+        // Gibt eine Trennlinie aus
         Console.WriteLine("---------------------------------------------------------------------------------------------------------");
     }
 
     public class ArrayStats
     {
+        // Eine Eigenschaft, die die Summe der Zahlen im Array darstellt
         public int Summe { get; set; }
+
+        // Eine Eigenschaft, die den Durchschnitt der Zahlen im Array darstellt
         public double Durchschnitt { get; set; }
+
+        // Eine Eigenschaft, die die kleinste Zahl im Array darstellt
         public int KleinsteZahl { get; set; }
+
+        // Eine Eigenschaft, die die größte Zahl im Array darstellt
         public int GroessteZahl { get; set; }
     }
 
+
     public static ArrayStats BerechneStatistiken(int[] zahlenArray)
     {
+        // Erzeugt eine neue Instanz der Klasse ArrayStats
         ArrayStats stats = new ArrayStats();
 
+        // Berechnet die Summe der Zahlen im Array und weist sie der Summe-Eigenschaft von stats zu
         stats.Summe = zahlenArray.Sum();
+
+        // Berechnet den Durchschnitt der Zahlen im Array und weist ihn der Durchschnitt-Eigenschaft von stats zu
         stats.Durchschnitt = zahlenArray.Average();
+
+        // Ermittelt die kleinste Zahl im Array und weist sie der KleinsteZahl-Eigenschaft von stats zu
         stats.KleinsteZahl = zahlenArray.Min();
+
+        // Ermittelt die größte Zahl im Array und weist sie der GroessteZahl-Eigenschaft von stats zu
         stats.GroessteZahl = zahlenArray.Max();
 
+        // Gibt das stats-Objekt zurück
         return stats;
     }
 
     public static void SucheZahlInArray(int[] array)
     {
+        // Gibt eine Nachricht aus, um die zu suchende Zahl einzugeben
         Console.WriteLine("Welche Zahl suchst du?");
-        int suchZahl = HoleGanzzahlVomBenutzer();
+
+        // Ruft die Methode HoleGanzzahlVomBenutzer auf, um eine Ganzzahl zwischen 1 und 1000 vom Benutzer zu erhalten, und weist sie der Variable suchZahl zu
+        int suchZahl = HoleGanzzahlVomBenutzer(1, 1000);
+
+        // Eine Variable, um den Status der Zahlensuche im Array zu speichern (gefunden oder nicht gefunden)
         bool gefunden = false;
+
+        // Durchläuft das Array und vergleicht jede Zahl mit der gesuchten Zahl
         foreach (int zahl in array)
         {
             if (zahl == suchZahl)
@@ -103,6 +145,7 @@ internal class Program
             }
         }
 
+        // Gibt eine entsprechende Meldung aus, je nachdem, ob die Zahl im Array gefunden wurde oder nicht
         if (gefunden)
         {
             Console.WriteLine($"Die Zahl {suchZahl} wurde im Array gefunden.");
@@ -113,13 +156,63 @@ internal class Program
         }
     }
 
-    public static int HoleGanzzahlVomBenutzer()
+    public static int HoleGanzzahlVomBenutzer(int min, int max)
     {
+        // Eine Variable zur Speicherung der eingegebenen Zahl
         int zahl;
-        while (!int.TryParse(Console.ReadLine(), out zahl))
+
+        // Eine Schleife, die solange läuft, bis eine gültige Eingabe erhalten wird
+        while (true)
         {
-            Console.Write("Ungültige Eingabe. Bitte geben Sie eine Ganzzahl ein: ");
+            // Überprüft, ob die Eingabe eine Ganzzahl zwischen min und max ist
+            if (!int.TryParse(Console.ReadLine(), out zahl) || zahl < min || zahl > max)
+            {
+                // Gibt eine Fehlermeldung aus, wenn die Eingabe ungültig ist, und fordert den Benutzer auf, eine gültige Ganzzahl einzugeben
+                Console.Write($"Ungültige Eingabe. Bitte geben Sie eine Ganzzahl zwischen {min} und {max} ein: ");
+            }
+            else
+            {
+                // Beendet die Bedingung und gibt die eingegebene Ganzzahl zurück, wenn die Eingabe gültig ist
+                break;
+            }
         }
+
         return zahl;
+    }
+
+    public static (int, int) HoleMinUndMaxVomBenutzer()
+    {
+        // Variablen zur Speicherung der kleinsten und größten Zahl
+        int min, max;
+
+        // Eine Schleife, die solange läuft, bis gültige Eingaben für min und max erhalten werden
+        while (true)
+        {
+            // Gibt eine Nachricht aus, um die kleinste Zahl einzugeben
+            Console.Write("Geben Sie die kleinste mögliche Zahl ein (zwischen 1 und 100): ");
+
+            // Ruft die Methode HoleGanzzahlVomBenutzer auf, um eine Ganzzahl zwischen 1 und 100 vom Benutzer zu erhalten, und weist sie der Variable min zu
+            min = HoleGanzzahlVomBenutzer(1, 100);
+
+            // Gibt eine Nachricht aus, um die größte Zahl einzugeben
+            Console.Write("Geben Sie die größte mögliche Zahl ein (muss größer sein als die kleinste Zahl): ");
+
+            // Ruft die Methode HoleGanzzahlVomBenutzer auf, um eine Ganzzahl größer als min vom Benutzer zu erhalten, und weist sie der Variable max zu
+            max = HoleGanzzahlVomBenutzer(min, 100);
+
+            // Überprüft, ob die maximale Zahl größer oder gleich der minimalen Zahl ist
+            if (min >= max)
+            {
+                // Gibt eine Fehlermeldung aus, dass die maximale Zahl größer sein muss als die minimale Zahl
+                Console.WriteLine("Die maximale Zahl muss größer als die minimale Zahl sein. Bitte versuchen Sie es erneut.");
+            }
+            else
+            {
+                // Beendet die Bedingung und gibt das Tuple (min, max) zurück, wenn die Eingaben gültig sind
+                break;
+            }
+        }
+
+        return (min, max);
     }
 }
