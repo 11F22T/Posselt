@@ -1,1 +1,21 @@
 INFO
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+(Übung 3)
+Der Code stellt ein Programm dar, das dem Benutzer ermöglicht, ein Array von Zahlen zu generieren und verschiedene Statistiken über das Array zu berechnen.
+Hier ist eine Zusammenfassung der Funktionalität:
+
+1. Das Programm fordert den Benutzer auf, die gewünschte Länge des Arrays einzugeben.
+2. Der Benutzer gibt die Länge des Arrays ein, und das Programm überprüft, ob die Eingabe gültig ist.
+3. Das Programm fordert den Benutzer auf, die kleinste und größte Zahl für das Array einzugeben.
+4. Der Benutzer gibt die Werte für die kleinste und größte Zahl ein, und das Programm überprüft auch hier die Gültigkeit der Eingabe.
+5. Das Programm generiert ein Array von Zahlen mit der angegebenen Länge und dem Bereich der Zahlen.
+6. Das Programm berechnet verschiedene statistische Informationen über das Array, wie die Summe, den Durchschnitt, die kleinste und größte Zahl.
+7. Das Programm gibt das generierte Array und die Häufigkeit jeder Zahl im Array aus.
+8. Das Programm gibt die berechneten statistischen Informationen über das Array aus.
+9. Das Programm fragt den Benutzer nach einer Zahl und sucht sie im Array.
+10. Das Programm gibt eine entsprechende Meldung aus, ob die Zahl im Array gefunden wurde oder nicht.
+
+Der Code verwendet verschiedene Methoden, um die Funktionalität aufzuteilen und den Code lesbarer und wiederverwendbarer zu machen.
+Es werden auch Klassen und Eigenschaften verwendet, um die statistischen Informationen über das Array zu strukturieren und zu speichern.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
