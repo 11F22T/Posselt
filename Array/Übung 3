@@ -1,15 +1,10 @@
 // Systembestandteile die genutzt werden...
 using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace TRY
 {
     class Program
     {
-        static void Main(string[] args)
-        {
             // Definiere Konstanten für Array-Länge, minimale und maximale Zahlen
             const int arrayLength = 100;
             const int min = 1;
@@ -81,21 +76,40 @@ namespace TRY
                 Console.WriteLine($"Zahl {i}: {haeufigkeit[i]} mal");
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Sotierung des Arrays");
             //Sortieren des Arrays 
+            for (int i = 0; i < zahlenArray.Length - 1; i++)
+            {
+                // Hier startet die äußere Schleife. Sie läuft von 0 bis zur Länge des Arrays minus eins.
+                // Der Zweck dieser Schleife besteht darin, die Anzahl der Durchläufe durch das Array zu steuern. Bei jedem Durchlauf wird das größte Element an das Ende des (nicht sortierten Teils des) Arrays verschoben.
 
-            Array.Sort(zahlenArray);
+                for (int j = 0; j < zahlenArray.Length - 1 - i; j++)
+                {
+                    // Die innere Schleife durchläuft das Array vom Anfang bis zum Ende des nicht sortierten Teils. 
+                    // Der Index j wird dazu verwendet, auf das aktuelle Element und das nächste Element (j+1) im Array zuzugreifen.
+                    // Mit jedem Durchgang wird die Länge des zu durchlaufenden Bereichs um eins reduziert ('- i'), da das größte Element jedes Durchgangs an das Ende des Arrays verschoben wird.
 
-            //ausgabe 
+                    if (zahlenArray[j] > zahlenArray[j + 1])
+                    {
+                        // Hier wird überprüft, ob das aktuelle Element größer als das nächste Element ist. Wenn dies der Fall ist, müssen diese beiden Elemente vertauscht werden, um sie in die richtige Reihenfolge zu bringen.
+
+                        // Tausche die Elemente
+                        int temp = zahlenArray[j];
+                        zahlenArray[j] = zahlenArray[j + 1];
+                        zahlenArray[j + 1] = temp;
+                        // Diese drei Zeilen führen den eigentlichen Tausch der beiden Elemente durch. 
+                        // Zuerst wird das aktuelle Element in einer temporären Variable gespeichert ('temp = zahlenArray[j]'). 
+                        // Dann wird das aktuelle Element durch das nächste Element ersetzt ('zahlenArray[j] = zahlenArray[j + 1]'). 
+                        // Schließlich wird das nächste Element durch das in der temporären Variable gespeicherte Element ersetzt ('zahlenArray[j + 1] = temp').
+                    }
+                }
+            }
+
+            //Ausgabe des Sortierten Arrays 
 
             foreach (var zahl in zahlenArray)
             {
-                Console.Write($"{zahl},");
+                Console.Write("," + zahl);
             }
-
-            Console.WriteLine();
-            Console.WriteLine();
 
             // Lese eine Zahl von der Tastatur ein und überprüfe, ob sie im Array vorkommt
             Console.Write("Geben Sie eine Zahl ein, um zu überprüfen, ob sie im Array vorkommt: ");
