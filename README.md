@@ -1,5 +1,6 @@
 # Posselt
 
+
 Bedeutungen:
 (A) INFO: Datei um Informationen über das jeweilige Programm zu speichern.
 
