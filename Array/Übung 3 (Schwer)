@@ -1,0 +1,125 @@
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        // Abfrage der Array-Länge und der Zahlenspanne
+        Console.Write("Geben Sie die gewünschte Länge des Arrays ein: ");
+        int arrayLength = HoleGanzzahlVomBenutzer();
+
+        Console.Write("Geben Sie die kleinste mögliche Zahl ein: ");
+        int min = HoleGanzzahlVomBenutzer();
+
+        Console.Write("Geben Sie die größte mögliche Zahl ein: ");
+        int max = HoleGanzzahlVomBenutzer();
+
+        // Aufruf
+        int[] zahlenArray = GeneriereArray(arrayLength, min, max);
+        ArrayStats stats = BerechneStatistiken(zahlenArray);
+
+        // Ausgabe 
+        AusgabeArrayUndHaeufigkeit(zahlenArray);
+        Console.WriteLine($"Summe der Zahlen: {stats.Summe}");
+        Console.WriteLine($"Durchschnitt der Zahlen: {stats.Durchschnitt}");
+        Console.WriteLine($"Kleinste Zahl: {stats.KleinsteZahl}");
+        Console.WriteLine($"Größte Zahl: {stats.GroessteZahl}");
+        Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+
+        SucheZahlInArray(zahlenArray);
+    }
+
+    private static int[] GeneriereArray(int laenge, int min, int max)
+    {
+        Random random = new Random();
+        int[] array = new int[laenge];
+        for (int i = 0; i < laenge; i++)
+        {
+            array[i] = random.Next(min, max + 1);
+        }
+        Array.Sort(array);
+        return array;
+    }
+
+    private static void AusgabeArrayUndHaeufigkeit(int[] array)
+    {
+        Dictionary<int, int> haeufigkeit = new Dictionary<int, int>();
+
+        Console.WriteLine("Inhalt des Arrays:");
+        foreach (int zahl in array)
+        {
+            Console.Write(zahl + " ");
+
+            if (haeufigkeit.ContainsKey(zahl))
+            {
+                haeufigkeit[zahl]++;
+            }
+            else
+            {
+                haeufigkeit[zahl] = 1;
+            }
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+
+        Console.WriteLine("Häufigkeit jeder Zahl:");
+        foreach (var pair in haeufigkeit)
+        {
+            Console.WriteLine($"Zahl {pair.Key}: {pair.Value} mal");
+        }
+        Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+    }
+
+    public class ArrayStats
+    {
+        public int Summe { get; set; }
+        public double Durchschnitt { get; set; }
+        public int KleinsteZahl { get; set; }
+        public int GroessteZahl { get; set; }
+    }
+
+    public static ArrayStats BerechneStatistiken(int[] zahlenArray)
+    {
+        ArrayStats stats = new ArrayStats();
+
+        stats.Summe = zahlenArray.Sum();
+        stats.Durchschnitt = zahlenArray.Average();
+        stats.KleinsteZahl = zahlenArray.Min();
+        stats.GroessteZahl = zahlenArray.Max();
+
+        return stats;
+    }
+
+    public static void SucheZahlInArray(int[] array)
+    {
+        Console.WriteLine("Welche Zahl suchst du?");
+        int suchZahl = HoleGanzzahlVomBenutzer();
+        bool gefunden = false;
+        foreach (int zahl in array)
+        {
+            if (zahl == suchZahl)
+            {
+                gefunden = true;
+                break;
+            }
+        }
+
+        if (gefunden)
+        {
+            Console.WriteLine($"Die Zahl {suchZahl} wurde im Array gefunden.");
+        }
+        else
+        {
+            Console.WriteLine($"Die Zahl {suchZahl} wurde nicht im Array gefunden.");
+        }
+    }
+
+    public static int HoleGanzzahlVomBenutzer()
+    {
+        int zahl;
+        while (!int.TryParse(Console.ReadLine(), out zahl))
+        {
+            Console.Write("Ungültige Eingabe. Bitte geben Sie eine Ganzzahl ein: ");
+        }
+        return zahl;
+    }
+}
