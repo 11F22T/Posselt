@@ -1,0 +1,22 @@
+Sicher! Hier ist eine interessante Übung zur Objektorientierten Programmierung in C#. 
+
+**Aufgabe:**
+Implementieren Sie ein einfaches Textabenteuer-Spiel mit objektorientierter Programmierung. In diesem Spiel werden Sie:
+
+- Eine `Character`-Klasse haben, die Attribute wie `Name`, `Health` und `Strength` hat und Methoden wie `Attack()` haben kann.
+- Eine `Enemy`-Klasse, die von der `Character`-Klasse erbt und spezielle Eigenschaften oder Methoden hat.
+- Eine `Player`-Klasse, die ebenfalls von der `Character`-Klasse erbt und zusätzliche Eigenschaften wie `Experience` oder `Level` hat, sowie spezielle Methoden.
+- Eine `Game`-Klasse, die das gesamte Spiel steuert, indem sie z.B. den Spieler und die Gegner erstellt, die Spiellogik implementiert und die Spielzustände verwaltet.
+- Eine Methode zur Interaktion zwischen Spieler und Feind, wie z.B. Kampfmechanismen.
+- Einen Weg, um den Fortschritt des Spiels zu verfolgen, z.B. durch Erhöhung des Spielerlevels oder durch Hinzufügen neuer Gegner, wenn ein Gegner besiegt wird.
+
+**Anforderungen:**
+- Nutzen Sie die Grundprinzipien der Objektorientierten Programmierung, wie z.B. Vererbung, Polymorphie, Abstraktion und Kapselung.
+- Implementieren Sie Fehlerbehandlung, um das Spiel vor unerwarteten Eingaben oder Aktionen zu schützen.
+- Nutzen Sie angemessene Datenstrukturen, um den Spielzustand zu verwalten und effizient auf Informationen zuzugreifen.
+
+**Bonus:**
+- Fügen Sie eine Speicher-/Ladefunktion hinzu, um den Spielstand zwischen den Spielsitzungen zu erhalten.
+- Fügen Sie zusätzliche Funktionen hinzu, wie z.B. verschiedene Arten von Gegnern, Gegenständen, die der Spieler aufnehmen und benutzen kann, oder verschiedene Arten von Angriffen basierend auf der Stärke des Charakters.
+
+Bitte beachten Sie, dass dies eine komplexe Aufgabe ist, die etwas Zeit in Anspruch nehmen kann. Aber sie ist eine gute Übung, um das Verständnis von OOP zu vertiefen und praktische Erfahrung in der Anwendung dieser Konzepte zu sammeln.
