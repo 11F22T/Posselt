@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+
+public class Bankkonto
+{
+    public string Kontonummer { get; set; }
+    public string Kontoinhaber { get; set; }
+    private double Kontostand { get; set; }
+
+    public Bankkonto(string kontoinhaber, double anfangsbilanz)
+    {
+        this.Kontonummer = Guid.NewGuid().ToString();
+        this.Kontoinhaber = kontoinhaber;
+        this.Kontostand = anfangsbilanz;
+    }
+
+    public void Einzahlen(double betrag)
+    {
+        if (betrag > 0)
+        {
+            Kontostand += betrag;
+        }
+    }
+
+    public void Abheben(double betrag)
+    {
+        if (betrag <= Kontostand)
+        {
+            Kontostand -= betrag;
+        }
+        else
+        {
+            Console.WriteLine("Nicht genug Guthaben zum Abheben.");
+        }
+    }
+
+    public double KontostandAbrufen()
+    {
+        return Kontostand;
+    }
+}
+
+public class Bank
+{
+    private List<Bankkonto> Konten { get; set; }
+
+    public Bank()
+    {
+        Konten = new List<Bankkonto>();
+    }
+
+    public void KontoHinzufuegen(Bankkonto konto)
+    {
+        Konten.Add(konto);
+    }
+
+    public void KontoEntfernen(string kontonummer)
+    {
+        Konten.RemoveAll(k => k.Kontonummer == kontonummer);
+    }
+
+    public void KontostandAnzeigen(string kontonummer)
+    {
+        Bankkonto konto = Konten.Find(k => k.Kontonummer == kontonummer);
+        if (konto != null)
+        {
+            Console.WriteLine($"Kontostand von {konto.Kontoinhaber}: {konto.KontostandAbrufen()}");
+        }
+        else
+        {
+            Console.WriteLine("Konto nicht gefunden.");
+        }
+    }
+}
+
+public class Program
+{
+    static void Main()
+    {
+        Bank meineBank = new Bank();
+        Bankkonto konto1 = new Bankkonto("Hans", 1000);
+        meineBank.KontoHinzufuegen(konto1);
+        meineBank.KontostandAnzeigen(konto1.Kontonummer);
+        konto1.Einzahlen(500);
+        meineBank.KontostandAnzeigen(konto1.Kontonummer);
+        konto1.Abheben(2000);
+        meineBank.KontostandAnzeigen(konto1.Kontonummer);
+        konto1.Abheben(1000);
+        meineBank.KontostandAnzeigen(konto1.Kontonummer);
+        meineBank.KontoEntfernen(konto1.Kontonummer);
+    }
+}
