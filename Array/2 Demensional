@@ -1,0 +1,56 @@
+// Systembestandteile die genutzt werden ? 
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace TRY
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Array für 2 Wochen, 7 Tage pro Woche
+            double[,] einnahmen = new double[2, 5];  
+
+            // Eingabe der täglichen Einnahmen
+            for (int woche = 0; woche < 2; woche++)
+            {
+                for (int tag = 0; tag < 5; tag++)
+                {
+                    Console.Write($"Bitte geben Sie die Einnahmen für Woche {woche + 1}, Tag {tag + 1} ein: ");
+                    einnahmen[woche, tag] = double.Parse(Console.ReadLine());
+                }
+            }
+
+            // Berechnung der Summe und des Durchschnitts
+            double summe = 0;
+            double auswahl = 1000;
+            double kleinstmögliche = 0;
+            for (int woche = 0; woche < 2; woche++)
+            {
+                for (int tag = 0; tag < 5; tag++)
+                {
+                    summe += einnahmen[woche, tag];
+
+                    if (einnahmen[woche, tag] <= auswahl)
+                    {
+                        kleinstmögliche = einnahmen[woche, tag];
+                    }
+
+                  
+                }
+            }
+
+            // Gesamtanzahl der Tage in 2 Wochen
+            double durchschnitt = summe / 14; 
+            
+
+            // Ausgabe der Summe und des Durchschnitts
+            Console.WriteLine($"Die Gesamteinnahmen für die zwei Wochen betragen: {summe} Euro.");
+            Console.WriteLine($"Der durchschnittliche Tagesumsatz für die zwei Wochen beträgt: {durchschnitt} Euro.");
+            Console.WriteLine($"Der durchschnittliche Tagesumsatz für die zwei Wochen beträgt: {kleinstmögliche} Euro.");
+        }
+    }
+}
+
