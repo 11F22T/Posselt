@@ -119,6 +119,33 @@ namespace Übung_2
             return (GByteProTagMoFr, GByteProTagSaSo);
         }
 
+double[,] einnahmen = new double[2,7];  // Array für 2 Wochen, 7 Tage pro Woche
+
+// Eingabe der täglichen Einnahmen
+for (int woche = 0; woche < 2; woche++)
+{
+    for (int tag = 0; tag < 7; tag++)
+    {
+        Console.Write($"Bitte geben Sie die Einnahmen für Woche {woche + 1}, Tag {tag + 1} ein: ");
+        einnahmen[woche, tag] = double.Parse(Console.ReadLine());
+    }
+}
+
+// Berechnung der Summe und des Durchschnitts
+double summe = 0;
+for (int woche = 0; woche < 2; woche++)
+{
+    for (int tag = 0; tag < 7; tag++)
+    {
+        summe += einnahmen[woche, tag];
+    }
+}
+
+double durchschnitt = summe / 14;  // Gesamtanzahl der Tage in 2 Wochen
+
+// Ausgabe der Summe und des Durchschnitts
+Console.WriteLine($"Die Gesamteinnahmen für die zwei Wochen betragen: {summe} Euro.");
+Console.WriteLine($"Der durchschnittliche Tagesumsatz für die zwei Wochen beträgt: {durchschnitt} Euro.");
 
 
 
