@@ -6,39 +6,59 @@ namespace Übung_2
     {
         static void Main(string[] args)
         {
-            // variablen 
-            string[] kamaraBezeichnung = { "Secure Model A", "Secure Model B", "Secure Model C" };
+            string[] kameraBezeichnung = { "Secure Model A", "Secure Model B", "Secure Model C" };
             double[] aufloesungInMegapixel = { 1.3, 2.0, 4.0 };
             double[] bitrate = { 6000, 8000, 12000 };
-            double laufzeitMoFr = 0;
-            double laufzeitSaSo = 0; ;
-            double auswahllaufzeitMoFr;
-            double auswahllaufzeitSaSo;
 
-            //hi
             Console.WriteLine("Willkommen beim Security Programm");
             Console.WriteLine();
+            PrintMoeglichkeiten(kameraBezeichnung, aufloesungInMegapixel, bitrate);
+            int auswahlKamera = AuswahleKamera() - 1;
+            double auswahlMegapixel = aufloesungInMegapixel[auswahlKamera];
+            double auswahlBitrate = bitrate[auswahlKamera];
+            (double laufzeitMoFr, double laufzeitSaSo) = LaufzeitAuswahlen();
 
-            //Möglichkeiten
+            (double GByteProTagMoFr, double GByteProTagSaSo) = getGByteWoche(auswahlMegapixel, auswahlBitrate, laufzeitMoFr, laufzeitSaSo);
+
+            string verwendeteKamera = kameraBezeichnung[auswahlKamera];
+            Console.WriteLine($"Verbrauch an GB von Mo -Fr mit dem Model {verwendeteKamera} {GByteProTagMoFr}");
+            Console.WriteLine($"Verbrauch an GB von Sa -So {GByteProTagSaSo}");
+        }
+
+        private static void PrintMoeglichkeiten(string[] kameraBezeichnung, double[] aufloesungInMegapixel, double[] bitrate)
+        {
             for (int i = 0; i < 3; i++)
             {
-                Console.WriteLine($"{kamaraBezeichnung[i]} : {aufloesungInMegapixel[i]} : {bitrate[i]}");
+                Console.WriteLine($"{i+1}. {kameraBezeichnung[i]} : {aufloesungInMegapixel[i]} : {bitrate[i]}");
             }
+        }
 
-            //Auswahl Kamera 
-            Console.WriteLine("Was für ein Model hast du?");
-            int auswahlKamara = int.Parse(Console.ReadLine()) - 1;
-            double auswahlMegapixel = aufloesungInMegapixel[auswahlKamara];
-            double auswahlBitrate = bitrate[auswahlKamara];
+        private static int AuswahleKamera()
+        {
+            Console.WriteLine("Welches Modell haben Sie?");
+            int auswahlKamera;
+            while (!int.TryParse(Console.ReadLine(), out auswahlKamera) || auswahlKamera < 1 || auswahlKamera > 3)
+            {
+                Console.WriteLine("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 1 und 3 ein.");
+            }
+            return auswahlKamera;
+        }
 
-            //Auswahl
+        private static (double, double) LaufzeitAuswahlen()
+        {
+            double laufzeitMoFr = 0;
+            double laufzeitSaSo = 0;
+
             Console.WriteLine("1 Dauerbetrieb (24 Stunden)");
-            Console.WriteLine("2 individuell (eingabe der Stunden)");
+            Console.WriteLine("2 individuell (Eingabe der Stunden)");
             Console.WriteLine("3 kein Einsatz (0 Stunden)");
-            Console.WriteLine();
 
-            Console.WriteLine("welche Option möchten sie?");
-            int auswahl = int.Parse(Console.ReadLine());
+            Console.WriteLine("Welche Option möchten Sie?");
+            int auswahl;
+            while (!int.TryParse(Console.ReadLine(), out auswahl) || auswahl < 1 || auswahl > 3)
+            {
+                Console.WriteLine("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 1 und 3 ein.");
+            }
 
             switch (auswahl)
             {
@@ -46,111 +66,43 @@ namespace Übung_2
                     laufzeitMoFr = 24;
                     laufzeitSaSo = 24;
                     break;
-
                 case 2:
-                    for (int i = 0; i < 5; i++)
-                    {
-                        Console.WriteLine("Wie lange läuft die Kamara am Tag?");
-                       auswahllaufzeitMoFr = System.Convert.ToDouble(Console.ReadLine());
-                        if (auswahllaufzeitMoFr <= 24 | 0>= auswahllaufzeitMoFr)
-                        {
-                            laufzeitMoFr += auswahllaufzeitMoFr;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Ein fehler ist aufgetreten");
-                            break;
-                        }
-                    }
-                    for (int i = 0; i < 2; i++)
-                    {
-                        Console.WriteLine("Wie lange lief die kamara am Tag am Wochende?");
-                        auswahllaufzeitSaSo = System.Convert.ToDouble(Console.ReadLine());
-                        if (auswahllaufzeitSaSo <= 24 | 0>= auswahllaufzeitSaSo)
-                        {
-                            laufzeitSaSo += auswahllaufzeitSaSo;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Ein fehler ist aufgetreten");
-                            break;
-                        }
-                    }
+                    laufzeitMoFr = FrageLaufzeit(5);
+                    laufzeitSaSo = FrageLaufzeit(2);
                     break;
-
                 case 3:
-                    Console.WriteLine("");
-
                     break;
-
-                default: Console.WriteLine("es ist ein fehler aufgetreten");
+                default:
+                    Console.WriteLine("Es ist ein Fehler aufgetreten.");
                     break;
             }
-
-            
-
-            //Aufruf
-            (double GByteProTagMoFr, double GByteProTagSaSo) = getGByteWoche(auswahlMegapixel, auswahlBitrate, laufzeitMoFr, laufzeitSaSo);
-            //Ausgabe
-            Console.WriteLine();
-            string verwendetekamara = kamaraBezeichnung[auswahlKamara];
-            Console.WriteLine($"Verbrauch an GB von Mo -Fr mit dem Model {verwendetekamara} {GByteProTagMoFr}");
-            Console.WriteLine($"Verbrauch an GB von Sa -So {GByteProTagSaSo}");
-
-
-
-
-
-
-
-
-
+            return (laufzeitMoFr, laufzeitSaSo);
         }
 
-        //Nr.2
+        private static double FrageLaufzeit(int tage)
+        {
+            double laufzeit = 0;
+            for (int i = 0; i < tage; i++)
+            {
+                Console.WriteLine("Wie lange läuft die Kamera am Tag?");
+                double auswahllaufzeit;
+                while (!double.TryParse(Console.ReadLine(), out auswahllaufzeit) || auswahllaufzeit < 0 || auswahllaufzeit > 24)
+                {
+                    Console.WriteLine("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 0 und 24 ein.");
+                }
+                laufzeit += auswahllaufzeit;
+            }
+            return laufzeit;
+        }
+
         private static (double, double) getGByteWoche(double auswahlMegapixel, double auswahlBitrate, double laufzeitMoFr, double laufzeitSaSo)
         {
             double KByte = auswahlBitrate / 8 * 3600;
             double MByte = KByte / 1000;
 
-            //Nr.3
-            double GByteProTagMoFr = MByte * laufzeitMoFr  / 1000;
+            double GByteProTagMoFr = MByte * laufzeitMoFr / 1000;
             double GByteProTagSaSo = MByte * laufzeitSaSo / 1000;
             return (GByteProTagMoFr, GByteProTagSaSo);
         }
-
-double[,] einnahmen = new double[2,7];  // Array für 2 Wochen, 7 Tage pro Woche
-
-// Eingabe der täglichen Einnahmen
-for (int woche = 0; woche < 2; woche++)
-{
-    for (int tag = 0; tag < 7; tag++)
-    {
-        Console.Write($"Bitte geben Sie die Einnahmen für Woche {woche + 1}, Tag {tag + 1} ein: ");
-        einnahmen[woche, tag] = double.Parse(Console.ReadLine());
     }
 }
-
-// Berechnung der Summe und des Durchschnitts
-double summe = 0;
-for (int woche = 0; woche < 2; woche++)
-{
-    for (int tag = 0; tag < 7; tag++)
-    {
-        summe += einnahmen[woche, tag];
-    }
-}
-
-double durchschnitt = summe / 14;  // Gesamtanzahl der Tage in 2 Wochen
-
-// Ausgabe der Summe und des Durchschnitts
-Console.WriteLine($"Die Gesamteinnahmen für die zwei Wochen betragen: {summe} Euro.");
-Console.WriteLine($"Der durchschnittliche Tagesumsatz für die zwei Wochen beträgt: {durchschnitt} Euro.");
-
-
-
-
-
-    }
-}
-
