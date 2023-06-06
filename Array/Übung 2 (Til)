@@ -1,108 +1,120 @@
- ´
-      
-     using System;
+using System;
 
-namespace ConsoleApp1
+namespace TRY
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Variable setzen
-            string[] Kamaramodel = { "Secure Model A", "Secure Model B", "Secure Model C" };
-            double[] aufloesungMegapixel = { 1.3, 2.0, 4.0 };
-            double[] bitrate = { 6000, 8000, 12000 };
            
-
-            //Nachfrage des Secure Models 
-            Console.WriteLine("Hallo geben sie bitte das gewünschte Kamaramodel ein");
-            Console.WriteLine("____________________________________________________");
-            Console.WriteLine("Secure Model A = 1");
-            Console.WriteLine("Secure Model B = 2");
-            Console.WriteLine("Secure Model c = 3");
-            Console.WriteLine("__________________");
-            int kamaramodelauswahl = System.Convert.ToInt32(Console.ReadLine()) -1;
-
-            double aufloesungMegapixelauswahle = aufloesungMegapixel[kamaramodelauswahl] ;
-            double bitrateauswahl = bitrate[kamaramodelauswahl] ;
-
-            //Ausgabe der Ausgewählten Bitrate sowie der Auflousung in Megapixeln
-            Console.WriteLine("Das Ausgewählte Secure Model bestitzt");
-            Console.WriteLine("_____________________________________");
-            Console.WriteLine($"Bitrate  = " + bitrateauswahl);
-            Console.WriteLine($"Aufloesung in Megapixel = " + aufloesungMegapixelauswahle);
-            Console.WriteLine("_____________________________________");
-            Console.WriteLine();
-
-            // Ausrechnung Von Kbyte pro Stunde und Mbyte pro Stunde
-            double KbyteproStunde = bitrateauswahl / 8 * 3600;
-            double mbyteproStunde = KbyteproStunde / 1000;
-
-            //Berechnung und Ausgabe der Gbyte pro Wochentage MO - FR 
-            Console.WriteLine("Wie Lange ist die Betriebsdauer ihres Secure Models in der Woche?");
-            double WochenTageMOFR = System.Convert.ToDouble(Console.ReadLine());
-
-            // Berechnung und Ausgabe der Gbyte pro Wochentage SA - So
-            Console.WriteLine("Wie lange läuft das Gerät am Wochenende?");
-            double WochentageSASO = System.Convert.ToDouble(Console.ReadLine());
+                // Variable setzen
+                string[] Kamaramodel = { "Secure Model A", "Secure Model B", "Secure Model C" };
+                double[] aufloesungMegapixel = { 1.3, 2.0, 4.0 };
+                double[] bitrate = { 6000, 8000, 12000 };
 
 
-            double GbyteproTagMOFR = 0.0;
-            double GbyteproTagSASO = 0.0;
+                //Nachfrage des Secure Models 
+                Console.WriteLine("Hallo geben sie bitte das gewünschte Kamaramodel ein");
+                Console.WriteLine("----------------------------------------------------");
+                Console.WriteLine("Secure Model A = 1");
+                Console.WriteLine("Secure Model B = 2");
+                Console.WriteLine("Secure Model c = 3");
+                Console.WriteLine("------------------");
+                int kamaramodelauswahl = System.Convert.ToInt32(Console.ReadLine()) - 1;
 
-            // Frage nach Auswahl der Nutzungszeit
-            Console.WriteLine("Geben sie bitte ihr Nutzungzeit die zu ihnen past! ");
-            Console.WriteLine("----------------------------------------------------------------------------");
-            Console.WriteLine("Rund  um die Uhr an (24 stunden)");
-            Console.WriteLine("Individuell");
-            Console.WriteLine("Nicht ihn benutzung (0 stunden)");
-            Console.WriteLine("----------------------------------------------------------------------------");
-            int  auswahlNutungszeit = System.Convert.ToInt32(Console.ReadLine());
+                double aufloesungMegapixelauswahle = aufloesungMegapixel[kamaramodelauswahl];
+                double bitrateauswahl = bitrate[kamaramodelauswahl];
 
-            switch (auswahlNutungszeit)
-            {
+                //Ausgabe der Ausgewählten Bitrate sowie der Auflousung in Megapixeln
+                Console.WriteLine("Das Ausgewählte Secure Model bestitzt");
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine($"Bitrate  = " + bitrateauswahl);
+                Console.WriteLine($"Aufloesung in Megapixel = " + aufloesungMegapixelauswahle);
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine();
 
-                case 1:
-                    
+                // Ausrechnung Von Kbyte pro Stunde und Mbyte pro Stunde
+                double KbyteproStunde = bitrateauswahl / 8 * 3600;
+                double mbyteproStunde = KbyteproStunde / 1000;
 
-                    break;
+                // Frage nach Auswahl der Nutzungszeit
+                Console.WriteLine("Geben sie bitte ihr Nutzungzeit die zu ihnen past! ");
+                Console.WriteLine("----------------------------------------------------------------------------");
+                Console.WriteLine("Rund um die Uhr an (24 stunden)");
+                Console.WriteLine("Individuell");
+                Console.WriteLine("Nicht ihn benutzung (0 stunden)");
+                Console.WriteLine("----------------------------------------------------------------------------");
+                int auswahlNutungszeit = System.Convert.ToInt32(Console.ReadLine());
+
+                switch (auswahlNutungszeit)
+                {
+
+                    case 1:
+
+                    double Gbytewoche = mbyteproStunde * 24 / 1000;
+                    Console.WriteLine("Secure Model Laufzeit");
+                    Console.WriteLine("---------------------");
+                    Console.WriteLine(Gbytewoche);
+
+                        break;
 
                 case 2:
                     
+                    double GbyteproTagSASO = 0.0;
+                    double GbyteproTagMOFR = 0.0;
+
                     for (int i = 0; i < 5; i++)
                     {
-                        GbyteproTagMOFR = mbyteproStunde * WochenTageMOFR / 1000;
+
+                     //Berechnung und Ausgabe der Gbyte pro Wochentage MO - FR 
+                     Console.WriteLine("Wie Lange ist die Betriebsdauer ihres Secure Models in der Woche?");
+                     double WochenTageMOFR = System.Convert.ToDouble(Console.ReadLine());
+
+                         GbyteproTagMOFR = mbyteproStunde * WochenTageMOFR / 1000;
+
                     }
-                    
 
-                    for (int i = 0; i < 2; i++)
-                    {
-                        GbyteproTagSASO = mbyteproStunde * WochentageSASO / 1000;
-                    }
 
-                    Console.WriteLine("Secure Model Laufzeit MO - FR Gbyte pro Tag");
-                    Console.WriteLine("---------------------");
-                    Console.WriteLine(GbyteproTagMOFR);
-                    Console.WriteLine("---------------------");
-                    Console.WriteLine("Secure Model Laufzeit SA - SO Gbyte pro Tag");
-                    Console.WriteLine("---------------------");
-                    Console.WriteLine(GbyteproTagSASO);
-                    Console.WriteLine("---------------------");
-                    Console.WriteLine();
-                    break;
+                        for (int i = 0; i < 2; i++)
+                        {
 
-                case 3:
-                    Console.WriteLine("Ihre Gbyte pro Tag Sind bei 0 Gbyte von Mo - Fr");
-                    Console.WriteLine("Ihre Gbyte pro Tag sind bei 0 Gbyte von Sa - So");
-                    Console.WriteLine();
-                    break;
+                         //Berechnung und Ausgabe der Gbyte pro Wochentage SA - So
+                         Console.WriteLine("Wie lange läuft das Gerät am Wochenende?");
+                         double WochentageSASO = System.Convert.ToDouble(Console.ReadLine());
+                         
+                         GbyteproTagSASO = mbyteproStunde * WochentageSASO / 1000;
 
-                default:
-                    Console.WriteLine("Ihre Eingaeb war Fehler haft!");
-                    Console.WriteLine("Bitte geben sie die Zahl noch mal ein.");
-                    break;
+                        }
+
+                        Console.WriteLine("Secure Model Laufzeit MO - FR Gbyte pro Tag");
+                        Console.WriteLine("---------------------");
+                        Console.WriteLine(GbyteproTagMOFR);
+                        Console.WriteLine("---------------------");
+                        Console.WriteLine("Secure Model Laufzeit SA - SO Gbyte pro Tag");
+                        Console.WriteLine("---------------------");
+                        Console.WriteLine(GbyteproTagSASO);
+                        Console.WriteLine("---------------------");
+                        Console.WriteLine();
+
+                        break;
+
+                    case 3:
+
+                        Console.WriteLine("Ihre Gbyte pro Tag Sind bei 0 Gbyte von Mo - Fr");
+                        Console.WriteLine("Ihre Gbyte pro Tag sind bei 0 Gbyte von Sa - So");
+                        Console.WriteLine();
+
+                        break;
+
+                    default:
+
+                        Console.WriteLine("Ihre Eingaeb war Fehler haft!");
+                        Console.WriteLine("Bitte geben sie die Zahl noch mal ein.");
+
+                        break;
+
+                }
+
             }
-
         }
     }
-}
