@@ -1,8 +1,8 @@
-using System; // Importieren der System-Bibliothek
+using System; 
 
-public class Program // Deklaration der Program-Klasse
+public class Program 
 {
-    public static void Main() // Hauptmethode des Programms
+    public static void Main()
     {
         int[,] array1 = new int[10, 10]; // Deklaration und Initialisierung von array1 mit 10x10 Elementen
         int[,] array2 = new int[10, 10]; // Deklaration und Initialisierung von array2 mit 10x10 Elementen
