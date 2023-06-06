@@ -1,41 +1,47 @@
+using System; // Importieren der System-Bibliothek
+
+public class Program // Deklaration der Program-Klasse
 {
-        int[,] array1 = new int[10, 10];
-        int[,] array2 = new int[10, 10];
-        int[,] array3 = new int[10, 10];
+    public static void Main() // Hauptmethode des Programms
+    {
+        int[,] array1 = new int[10, 10]; // Deklaration und Initialisierung von array1 mit 10x10 Elementen
+        int[,] array2 = new int[10, 10]; // Deklaration und Initialisierung von array2 mit 10x10 Elementen
+        int[,] array3 = new int[10, 10]; // Deklaration und Initialisierung von array3 mit 10x10 Elementen
 
-        // Kleines Einmaleins von 1 bis 100
+        // Initialisierung und Ausgabe von array1
         Console.WriteLine("Array 1:");
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++) // Äußere Schleife über die Zeilen von array1
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 10; j++) // Innere Schleife über die Spalten von array1
             {
-                array1[i, j] = (i + 1) * (j + 1);
-                Console.Write("{0,3} ", array1[i, j]);
+                array1[i, j] = (i + 1) * (j + 1); // Berechnung und Zuweisung des Wertes an array1[i, j]
+                Console.Write("{0,3} ", array1[i, j]); // Ausgabe des Wertes von array1[i, j]
             }
-            Console.WriteLine();
+            Console.WriteLine(); // Zeilenumbruch nach jeder Zeile von array1
         }
 
-        // Kleines Einmaleins von 100 bis 1
+        // Initialisierung und Ausgabe von array2
         Console.WriteLine("\nArray 2:");
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++) // Äußere Schleife über die Zeilen von array2
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 10; j++) // Innere Schleife über die Spalten von array2
             {
-                array2[i, j] = (10 - i) * (10 - j);
-                Console.Write("{0,3} ", array2[i, j]);
+                array2[i, j] = (10 - i) * (10 - j); // Berechnung und Zuweisung des Wertes an array2[i, j]
+                Console.Write("{0,3} ", array2[i, j]); // Ausgabe des Wertes von array2[i, j]
             }
-            Console.WriteLine();
+            Console.WriteLine(); // Zeilenumbruch nach jeder Zeile von array2
         }
 
-        // Füllen des dritten Arrays
+        // Initialisierung und Ausgabe von array3
         Console.WriteLine("\nArray 3:");
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++) // Äußere Schleife über die Zeilen von array3
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 10; j++) // Innere Schleife über die Spalten von array3
             {
-                array3[i, j] = array1[i, j] * array2[i, j];
-                Console.Write("{0,3} ", array3[i, j]);
+                array3[i, j] = array1[i, j] * array2[i, j]; // Berechnung und Zuweisung des Wertes an array3[i, j]
+                Console.Write("{0,3} ", array3[i, j]); // Ausgabe des Wertes von array3[i, j]
             }
-            Console.WriteLine();
+            Console.WriteLine(); // Zeilenumbruch nach jeder Zeile von array3
         }
     }
+}
