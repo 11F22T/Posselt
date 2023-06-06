@@ -15,7 +15,7 @@
             Console.WriteLine();
         }
 
-        // Neues Muster für array2
+        // Kleines Einmaleins von 100 bis 1
         Console.WriteLine("\nArray 2:");
         for (int i = 0; i < 10; i++)
         {
