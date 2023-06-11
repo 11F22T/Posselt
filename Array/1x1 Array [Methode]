@@ -1,0 +1,58 @@
+namespace TRY1
+{
+    using System;
+    using System.Collections.Generic;
+
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Deklaration und Initialisierung von array1
+            int[,] array1 = new int[10, 10];
+            int[,] array2 = new int[10, 10];
+            int[,] array3 = new int[10, 10];
+
+            // Ausgabe des Labels für array1 und Initialisierung und Ausgabe von array1
+            Console.WriteLine("Array 1:");
+            InitializeAndPrintArray(ref array1);
+
+            // Ausgabe des Labels für array2 und Initialisierung und Ausgabe von array2
+            Console.WriteLine("Array 2:");
+            InitializeAndPrintArray(ref array2, true);
+
+            // Ausgabe des Labels für array3 und Initialisierung und Ausgabe von array3
+            Console.WriteLine("Array 3:");
+            InitializeAndPrintArray(ref array3, false, array1, array2);
+        }
+
+        // Definition der Methode zur Initialisierung und Ausgabe eines Arrays
+        public static void InitializeAndPrintArray(ref int[,] array, bool isInverse = false, int[,] array1 = null, int[,] array2 = null)
+        {
+            // Beginn des Ausdrucks auf der Konsole
+            Console.WriteLine();
+
+            // Äußere Schleife zur Iteration über die Zeilen des Arrays
+            for (int i = 0; i < 10; i++)
+            {
+                // Innere Schleife zur Iteration über die Spalten des Arrays
+                for (int j = 0; j < 10; j++)
+                {
+                    // Bedingung zur Prüfung, ob array1 und array2 vorhanden sind
+                    if (array1 != null && array2 != null)
+                        // Berechnung und Zuweisung des Wertes für array3, falls array1 und array2 vorhanden sind
+                        array[i, j] = array1[i, j] * array2[i, j];
+                    else
+                        // Berechnung und Zuweisung des Wertes für array1 oder array2, abhängig vom isInverse Parameter
+                        array[i, j] = isInverse ? (10 - i) * (10 - j) : (i + 1) * (j + 1);
+
+                    // Ausgabe des aktuellen Werts des Arrays auf der Konsole
+                    Console.Write("{0,3} ", array[i, j]);
+                }
+
+                // Neue Zeile in der Konsole am Ende jeder Zeile des Arrays
+                Console.WriteLine();
+            }
+        }
+    }
+}
