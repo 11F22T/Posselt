@@ -1,0 +1,38 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Anzahl der Sitzplätze im Flugzeug
+        const int SitzplaetzeAnzahl = 100;
+
+        // Erstellen Sie das array Sitzplatz
+        bool[] Sitzplatz = new bool[SitzplaetzeAnzahl];
+
+        // Random Objekt für Zufallszahlen
+        Random rand = new Random();
+
+        // Initialisiere Anzahl der belegten und freien Plätze
+        int BelegtePlaetze = 0, FreiePlaetze = 0;
+
+        // Füllen Sie das array Sitzplatz
+        for (int i = 0; i < SitzplaetzeAnzahl; i++)
+        {
+            // Generiere eine Zufallszahl zwischen 0 und 1
+            double randomNumber = rand.NextDouble();
+
+            // Wenn die Zufallszahl größer als 0.5 ist, markieren Sie den Platz als frei (true), sonst als belegt (false)
+            Sitzplatz[i] = randomNumber > 0.5;
+
+            // Aktualisieren der Anzahl der belegten und freien Plätze
+            if (Sitzplatz[i]) FreiePlaetze++;
+            else BelegtePlaetze++;
+        }
+
+        // Ausgabe der Anzahl der belegten und freien Plätze
+        Console.WriteLine($"Die Anzahl der belegten Plätze ist {BelegtePlaetze}.");
+        Console.WriteLine($"Die Anzahl der freien Plätze ist {FreiePlaetze}.");
+    }
+}
+
