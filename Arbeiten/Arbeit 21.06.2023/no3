@@ -1,0 +1,80 @@
+{
+            string[,] wasserkastenGlas = new string[3, 4]
+            {
+                {"Glas","Glas","PET","Glas"},
+                {"Glas","leer","Glas","PET"},
+                {"PET","Glas","Glas","Glas"}
+            };
+            string[,] wasserkastenPET = new string[3, 4]
+            {
+                {"PET","leer","PET","PET" },
+                {"Glas","leer","PET","PET"},
+                {"PET","PET","Glas","PET" }
+            };
+            //variablen 
+            double falscheFlaschenErsterKasten = 0;
+            double falscheFlschenZweiterKasten = 0;
+
+            //PET rausfiltern
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (wasserkastenGlas[i, j] == "PET")
+                    {
+                        wasserkastenGlas[i, j] = "leer";
+                        falscheFlaschenErsterKasten++;
+
+                    }
+                }
+            }
+
+            //Glas rausfiltern
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (wasserkastenPET[i, j] == "Glas")
+                    {
+                        wasserkastenPET[i, j] = "leer";
+                        falscheFlschenZweiterKasten++;
+                    }
+                }
+            }
+
+            //Ausgabe 
+
+            Console.WriteLine("");
+            Console.WriteLine("Falsche Flaschen im Kasten: " + falscheFlaschenErsterKasten);
+            Console.WriteLine();
+            Console.WriteLine("Der erste neu sortierte Kasten");
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+
+                    Console.Write("{0,3} ", wasserkastenGlas[i, j]);
+
+                }
+
+            }
+
+            //Ausgabe zweiter Kasten
+            Console.WriteLine();
+            Console.WriteLine("Falsche Flaschen im zweiten Kasten: " + falscheFlschenZweiterKasten);
+            Console.WriteLine();
+            Console.WriteLine("Der zweite neu sortierte Kasten");
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+
+                    Console.Write("{0,3} ", wasserkastenPET[i, j]);
+
+
+                }
+
+            }
+
+            Console.ReadLine();
+        }
