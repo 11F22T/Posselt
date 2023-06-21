@@ -1,0 +1,28 @@
+{
+            Console.WriteLine("Hallo");
+            int[] messdaten = new int[10] { 12, 3, 38, 17, 35, 21, -60, 2, 68, 27 };
+            double durschnitt = 0;
+            double sum = 0;
+            int Anfang = 1;
+
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (messdaten[i] <= 50 || messdaten[i] >= -30)
+                {
+                    Console.WriteLine("Messwert" + Anfang++ + " " + messdaten[i]);
+                    sum += messdaten[i];
+                }
+
+            }
+
+            //Berechnung
+            durschnitt = sum / 8;
+
+            //Ausgabe
+            Console.WriteLine("Es werden zwei variablen nicht berücksichtigt");
+            Console.WriteLine("Der Durchschnitt ist:" + durschnitt);
+            Console.ReadLine();
+
+        }
