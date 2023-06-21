@@ -1,4 +1,7 @@
-{
+class Program
+    {
+        static void Main(string[] args)
+        {
             string[,] wasserkastenGlas = new string[3, 4]
             {
                 {"Glas","Glas","PET","Glas"},
@@ -56,6 +59,7 @@
                     Console.Write("{0,3} ", wasserkastenGlas[i, j]);
 
                 }
+                Console.WriteLine();
 
             }
 
@@ -73,7 +77,7 @@
 
 
                 }
-
+                Console.WriteLine();
             }
 
             Console.ReadLine();
