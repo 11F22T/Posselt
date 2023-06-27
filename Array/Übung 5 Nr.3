@@ -1,0 +1,28 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Bitte geben Sie ein Wort ein: ");
+        string wort = Console.ReadLine();
+
+        string umgekehrtesWort = ReverseString(wort);
+
+        if (wort.Equals(umgekehrtesWort, StringComparison.OrdinalIgnoreCase))
+        {
+            Console.WriteLine("Das Wort ist ein Palindrom.");
+        }
+        else
+        {
+            Console.WriteLine("Das Wort ist kein Palindrom.");
+        }
+    }
+
+    static string ReverseString(string s)
+    {
+        char[] arr = s.ToCharArray();
+        Array.Reverse(arr);
+        return new string(arr);
+    }
+}
