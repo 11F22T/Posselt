@@ -1,0 +1,64 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] zahlenArray = {12, 61, 47, 6, 62, 78, 95, 21};
+        int summeTeilbarDurchDrei = 0;
+        int summeNichtTeilbarDurchDrei = 0;
+        
+        foreach (var zahl in zahlenArray)
+        {
+            if (zahl % 3 == 0)
+            {
+                summeTeilbarDurchDrei += zahl;
+            }
+            else
+            {
+                summeNichtTeilbarDurchDrei += zahl;
+            }
+        }
+
+        Console.WriteLine("Die Summe der Zahlen, die durch drei teilbar sind, beträgt: " + summeTeilbarDurchDrei);
+        Console.WriteLine("Die Summe der Zahlen, die nicht durch drei teilbar sind, beträgt: " + summeNichtTeilbarDurchDrei);
+
+        // Erweiterung
+        int eingabeVersuche = 0;
+        while (eingabeVersuche < 3)
+        {
+            Console.Write("Bitte geben Sie einen positiven, ganzen, einstelligen Teiler ein: ");
+            if (Int32.TryParse(Console.ReadLine(), out int teiler) && teiler > 0 && teiler < 10)
+            {
+                int summeTeilbarDurchTeiler = 0;
+                int summeNichtTeilbarDurchTeiler = 0;
+
+                foreach (var zahl in zahlenArray)
+                {
+                    if (zahl % teiler == 0)
+                    {
+                        summeTeilbarDurchTeiler += zahl;
+                    }
+                    else
+                    {
+                        summeNichtTeilbarDurchTeiler += zahl;
+                    }
+                }
+
+                Console.WriteLine("Die Summe der Zahlen, die durch " + teiler + " teilbar sind, beträgt: " + summeTeilbarDurchTeiler);
+                Console.WriteLine("Die Summe der Zahlen, die nicht durch " + teiler + " teilbar sind, beträgt: " + summeNichtTeilbarDurchTeiler);
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Ungültige Eingabe. Bitte versuchen Sie es erneut.");
+                eingabeVersuche++;
+            }
+        }
+
+        if (eingabeVersuche == 3)
+        {
+            Console.WriteLine("Die maximal erlaubte Anzahl an Fehlversuchen wurde erreicht. Das Programm wird beendet.");
+        }
+    }
+}
