@@ -1,28 +1,29 @@
 using System;
 
-namespace Übung_5
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            //Nr.3 
-            Console.WriteLine("Bitte geben sie ein Wort ein");
-            string Wort = Console.ReadLine().ToLower();
+        Console.Write("Bitte geben Sie ein Wort ein: ");
+        string wort = Console.ReadLine().ToLower();
 
-            char[] wortArray = Wort.ToCharArray();
-            Array.Reverse(wortArray);
-            string umgetretesWort = new string(wortArray);
-            if (Wort == umgetretesWort)
+        bool istPalindrom = true;
+        for (int i = 0; i < wort.Length / 2; i++)
+        {
+            if (wort[i] != wort[wort.Length - i - 1])
             {
-                Console.WriteLine("Das ist ein Palidrom");
+                istPalindrom = false;
+                break;
             }
-            else
-            {
-                Console.WriteLine("Das ist kein Palidrom");
-            }    
         }
 
+        if (istPalindrom)
+        {
+            Console.WriteLine("Das eingegebene Wort ist ein Palindrom.");
+        }
+        else
+        {
+            Console.WriteLine("Das eingegebene Wort ist kein Palindrom.");
+        }
     }
-    
 }
