@@ -1,32 +1,29 @@
 using System;
 
-namespace Nr._1
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        //Eingabe 
+        Console.WriteLine("f(x)= ax² + bx + c");
+        Console.WriteLine();
+        Console.WriteLine("Bitte gebe dein a ein:");
+        double a = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Bitte gebe dein b ein:");
+        double b = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Bitte gebe dein c ein:");
+        double c = Convert.ToDouble(Console.ReadLine());
+
+        double[] wertetabelle = new double[11];
+
+        //Ausgabe 
+        Console.WriteLine("Wertetabelle");
+        for (int i = 0; i < 11; i++)
         {
-            //Eingabe 
-            Console.WriteLine("f(x)= ax² + bx + c");
-            Console.WriteLine();
-            Console.WriteLine("Bitte gebe dein a ein:");
-            double a = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Bitte gebe dein b ein:");
-            double b = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Bitte gebe dein c ein:");
-            double c = Convert.ToDouble(Console.ReadLine());
-
-            double[] wertetabelle = new double[11];
-
-            //Ausgabe 
-            Console.WriteLine("Wertetabelle");
-            for (int i = 0; i < 11; i++)
-            {
-                wertetabelle[i + 1] = a * Math.Pow(i, 2) + b * i + c;
-                Console.WriteLine($"f({i}) = {wertetabelle[i + 5]}");
-            }
+            wertetabelle[i] = a * Math.Pow(i, 2) + b * i + c;
+            Console.WriteLine($"f({i}) = {wertetabelle[i]}");
         }
     }
 }
