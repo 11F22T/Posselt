@@ -1,28 +1,28 @@
 using System;
 
-class Program
+namespace Übung_5
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.Write("Bitte geben Sie ein Wort ein: ");
-        string wort = Console.ReadLine();
-
-        string umgekehrtesWort = ReverseString(wort);
-
-        if (wort.Equals(umgekehrtesWort, StringComparison.OrdinalIgnoreCase))
+        static void Main(string[] args)
         {
-            Console.WriteLine("Das Wort ist ein Palindrom.");
-        }
-        else
-        {
-            Console.WriteLine("Das Wort ist kein Palindrom.");
-        }
-    }
+            //Nr.3 
+            Console.WriteLine("Bitte geben sie ein Wort ein");
+            string Wort = Console.ReadLine().ToLower();
 
-    static string ReverseString(string s)
-    {
-        char[] arr = s.ToCharArray();
-        Array.Reverse(arr);
-        return new string(arr);
+            char[] wortArray = Wort.ToCharArray();
+            Array.Reverse(wortArray);
+            string umgetretesWort = new string(wortArray);
+            if (Wort == umgetretesWort)
+            {
+                Console.WriteLine("Das ist ein Palidrom");
+            }
+            else
+            {
+                Console.WriteLine("Das ist kein Palidrom");
+            }    
+        }
+
     }
+    
 }
