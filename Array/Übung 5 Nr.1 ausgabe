@@ -4,7 +4,7 @@ class Program
 {
     static void Main()
     {
-        // Input 
+        // Benutzer wird aufgefordert, Koeffizienten einzugeben
         Console.WriteLine("f(x)= ax² + bx + c");
         Console.WriteLine();
         Console.WriteLine("Bitte gebe dein a ein:");
@@ -16,11 +16,12 @@ class Program
         Console.WriteLine("Bitte gebe dein c ein:");
         double c = Convert.ToDouble(Console.ReadLine());
 
-        int gridSize = 21; // size of the grid (must be an odd number)
+        int gridSize = 21; // Größe des Gitters (muss eine ungerade Zahl sein)
 
+        // Initialisierung des zweidimensionalen Arrays für das Gitter
         char[][] grid = new char[gridSize][];
 
-        // Initialize the grid with ' ' character
+        // Initialisierung des Gitters mit Leerzeichen ' '
         for (int i = 0; i < gridSize; i++)
         {
             grid[i] = new char[gridSize];
@@ -30,26 +31,33 @@ class Program
             }
         }
 
-        // Draw axes
+        // Achsen zeichnen
         int middle = gridSize / 2;
         for (int i = 0; i < gridSize; i++)
         {
-            grid[middle][i] = '_'; // x-axis
-            grid[i][middle] = '|'; // y-axis
+            grid[middle][i] = '_'; // x-Achse
+            grid[i][middle] = '|'; // y-Achse
         }
 
-        // Draw the function
+        // Zeichnen der Funktion
         for (int x = -middle; x <= middle; x++)
         {
+            // Berechnung des y-Wertes für die gegebene x-Position
             double y = a * Math.Pow(x, 2) + b * x + c;
-            int yCoord = (int)Math.Round(-y + middle); // invert y to switch between console and Cartesian coordinates
+
+            // Umwandlung des y-Wertes in eine Koordinate im Gitter
+            // wir invertieren y, um zwischen Konsolen- und kartesischen Koordinaten zu wechseln
+            int yCoord = (int)Math.Round(-y + middle); 
+
+            // Überprüfen, ob der y-Wert im sichtbaren Bereich des Gitters liegt
             if (yCoord >= 0 && yCoord < gridSize)
             {
+                // Setzen des Zeichens '*' an der entsprechenden Position im Gitter
                 grid[yCoord][x + middle] = '*';
             }
         }
 
-        // Print the grid
+        // Ausgabe des Gitters
         for (int i = 0; i < gridSize; i++)
         {
             for (int j = 0; j < gridSize; j++)
