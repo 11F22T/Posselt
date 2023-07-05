@@ -1,0 +1,62 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Input 
+        Console.WriteLine("f(x)= ax² + bx + c");
+        Console.WriteLine();
+        Console.WriteLine("Bitte gebe dein a ein:");
+        double a = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Bitte gebe dein b ein:");
+        double b = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Bitte gebe dein c ein:");
+        double c = Convert.ToDouble(Console.ReadLine());
+
+        int gridSize = 21; // size of the grid (must be an odd number)
+
+        char[][] grid = new char[gridSize][];
+
+        // Initialize the grid with ' ' character
+        for (int i = 0; i < gridSize; i++)
+        {
+            grid[i] = new char[gridSize];
+            for (int j = 0; j < gridSize; j++)
+            {
+                grid[i][j] = ' ';
+            }
+        }
+
+        // Draw axes
+        int middle = gridSize / 2;
+        for (int i = 0; i < gridSize; i++)
+        {
+            grid[middle][i] = '_'; // x-axis
+            grid[i][middle] = '|'; // y-axis
+        }
+
+        // Draw the function
+        for (int x = -middle; x <= middle; x++)
+        {
+            double y = a * Math.Pow(x, 2) + b * x + c;
+            int yCoord = (int)Math.Round(-y + middle); // invert y to switch between console and Cartesian coordinates
+            if (yCoord >= 0 && yCoord < gridSize)
+            {
+                grid[yCoord][x + middle] = '*';
+            }
+        }
+
+        // Print the grid
+        for (int i = 0; i < gridSize; i++)
+        {
+            for (int j = 0; j < gridSize; j++)
+            {
+                Console.Write(grid[i][j]);
+            }
+            Console.WriteLine();
+        }
+    }
+}
