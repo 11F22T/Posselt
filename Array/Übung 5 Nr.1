@@ -16,6 +16,27 @@ class Program
         Console.WriteLine("Bitte gebe dein c ein:");
         double c = Convert.ToDouble(Console.ReadLine());
 
+        // Scheitelpunkt berechnen
+        double scheitelpunktX = -b / (2 * a);
+        double scheitelpunktY = a * Math.Pow(scheitelpunktX, 2) + b * scheitelpunktX + c;
+        Console.WriteLine($"Der Scheitelpunkt ist S({scheitelpunktX}, {scheitelpunktY})");
+
+        // Nullstellen berechnen
+        double discriminant = Math.Pow(b, 2) - 4 * a * c;
+        if (discriminant < 0)
+        {
+            Console.WriteLine("Die Funktion hat keine Nullstellen");
+        }
+        else
+        {
+            double x1 = (-b + Math.Sqrt(discriminant)) / (2 * a);
+            double x2 = (-b - Math.Sqrt(discriminant)) / (2 * a);
+            Console.WriteLine($"Die Nullstellen sind x1={x1} und x2={x2}");
+        }
+
+        // Schnittpunkt mit der Y-Achse
+        Console.WriteLine($"Der Schnittpunkt mit der Y-Achse ist P(0, {c})");
+
         double[] wertetabelle = new double[11];
 
         //Ausgabe 
