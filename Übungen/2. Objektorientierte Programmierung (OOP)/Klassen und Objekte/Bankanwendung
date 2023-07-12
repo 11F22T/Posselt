@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class Bankkonto
 {
-    public string Kontonummer { get; set; }
-    public string Kontoinhaber { get; set; }
+    public string Kontonummer { get; private set; }
+    public string Kontoinhaber { get; private set; }
     private double Kontostand { get; set; }
 
     public Bankkonto(string kontoinhaber, double anfangsbilanz)
@@ -19,6 +19,11 @@ public class Bankkonto
         if (betrag > 0)
         {
             Kontostand += betrag;
+            Console.WriteLine($"Einzahlung von {betrag} erfolgreich. Neuer Kontostand: {Kontostand}");
+        }
+        else
+        {
+            Console.WriteLine("Einzahlungsbetrag muss größer als 0 sein.");
         }
     }
 
@@ -27,6 +32,7 @@ public class Bankkonto
         if (betrag <= Kontostand)
         {
             Kontostand -= betrag;
+            Console.WriteLine($"Abhebung von {betrag} erfolgreich. Neuer Kontostand: {Kontostand}");
         }
         else
         {
@@ -52,24 +58,26 @@ public class Bank
     public void KontoHinzufuegen(Bankkonto konto)
     {
         Konten.Add(konto);
+        Console.WriteLine($"Konto hinzugefügt: {konto.Kontoinhaber}, Kontonummer: {konto.Kontonummer}, Anfangsbilanz: {konto.KontostandAbrufen()}");
     }
 
     public void KontoEntfernen(string kontonummer)
     {
-        Konten.RemoveAll(k => k.Kontonummer == kontonummer);
-    }
-
-    public void KontostandAnzeigen(string kontonummer)
-    {
-        Bankkonto konto = Konten.Find(k => k.Kontonummer == kontonummer);
+        var konto = Konten.Find(k => k.Kontonummer == kontonummer);
         if (konto != null)
         {
-            Console.WriteLine($"Kontostand von {konto.Kontoinhaber}: {konto.KontostandAbrufen()}");
+            Konten.Remove(konto);
+            Console.WriteLine($"Konto entfernt: {konto.Kontoinhaber}, Kontonummer: {konto.Kontonummer}");
         }
         else
         {
             Console.WriteLine("Konto nicht gefunden.");
         }
+    }
+
+    public Bankkonto KontoSuchen(string kontonummer)
+    {
+        return Konten.Find(k => k.Kontonummer == kontonummer);
     }
 }
 
@@ -78,15 +86,79 @@ public class Program
     static void Main()
     {
         Bank meineBank = new Bank();
-        Bankkonto konto1 = new Bankkonto("Hans", 1000);
-        meineBank.KontoHinzufuegen(konto1);
-        meineBank.KontostandAnzeigen(konto1.Kontonummer);
-        konto1.Einzahlen(500);
-        meineBank.KontostandAnzeigen(konto1.Kontonummer);
-        konto1.Abheben(2000);
-        meineBank.KontostandAnzeigen(konto1.Kontonummer);
-        konto1.Abheben(1000);
-        meineBank.KontostandAnzeigen(konto1.Kontonummer);
-        meineBank.KontoEntfernen(konto1.Kontonummer);
+        while (true)
+        {
+            Console.WriteLine("1 - Konto hinzufügen");
+            Console.WriteLine("2 - Konto entfernen");
+            Console.WriteLine("3 - Geld einzahlen");
+            Console.WriteLine("4 - Geld abheben");
+            Console.WriteLine("5 - Kontostand anzeigen");
+            Console.WriteLine("0 - Beenden");
+            Console.Write("Aktion auswählen: ");
+            var auswahl = Console.ReadLine();
+            switch (auswahl)
+            {
+                case "1":
+                    Console.Write("Kontoinhaber eingeben: ");
+                    string kontoinhaber = Console.ReadLine();
+                    Console.Write("Anfangsbilanz eingeben: ");
+                    double anfangsbilanz = Convert.ToDouble(Console.ReadLine());
+                    meineBank.KontoHinzufuegen(new Bankkonto(kontoinhaber, anfangsbilanz));
+                    break;
+                case "2":
+                    Console.Write("Zu entfernende Kontonummer eingeben: ");
+                    string kontonummer = Console.ReadLine();
+                    meineBank.KontoEntfernen(kontonummer);
+                    break;
+                case "3":
+                    Console.Write("Kontonummer eingeben: ");
+                    kontonummer = Console.ReadLine();
+                    var konto = meineBank.KontoSuchen(kontonummer);
+                    if (konto != null)
+                    {
+                        Console.Write("Einzahlungsbetrag eingeben: ");
+                        double betrag = Convert.ToDouble(Console.ReadLine());
+                        konto.Einzahlen(betrag);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Konto nicht gefunden.");
+                    }
+                    break;
+                case "4":
+                    Console.Write("Kontonummer eingeben: ");
+                    kontonummer = Console.ReadLine();
+                    konto = meineBank.KontoSuchen(kontonummer);
+                    if (konto != null)
+                    {
+                        Console.Write("Abhebungsbetrag eingeben: ");
+                        double betrag = Convert.ToDouble(Console.ReadLine());
+                        konto.Abheben(betrag);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Konto nicht gefunden.");
+                    }
+                    break;
+                case "5":
+                    Console.Write("Kontonummer eingeben: ");
+                    kontonummer = Console.ReadLine();
+                    konto = meineBank.KontoSuchen(kontonummer);
+                    if (konto != null)
+                    {
+                        Console.WriteLine($"Kontostand von {konto.Kontoinhaber}: {konto.KontostandAbrufen()}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Konto nicht gefunden.");
+                    }
+                    break;
+                case "0":
+                    return;
+                default:
+                    Console.WriteLine("Ungültige Auswahl.");
+                    break;
+            }
+        }
     }
 }
