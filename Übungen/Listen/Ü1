@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Erstellen Sie eine Liste von Ganzzahlen
+        List<int> numbers = new List<int>();
+
+        // Fügen Sie fünf beliebige Zahlen zur Liste hinzu
+        numbers.Add(1);
+        numbers.Add(2);
+        numbers.Add(3);
+        numbers.Add(4);
+        numbers.Add(5);
+
+        // Geben Sie alle Zahlen in der Liste aus
+        Console.WriteLine("Liste aller Zahlen:");
+        foreach (var number in numbers)
+        {
+            Console.WriteLine(number);
+        }
+
+        // Entfernen Sie die dritte Nummer aus der Liste
+        numbers.RemoveAt(2); // Beachten Sie, dass die Indizierung bei 0 beginnt
+
+        // Geben Sie alle Zahlen in der Liste aus
+        Console.WriteLine("\nListe nach dem Entfernen der dritten Zahl:");
+        foreach (var number in numbers)
+        {
+            Console.WriteLine(number);
+        }
+
+        // Finden Sie heraus, ob eine bestimmte Zahl in der Liste vorhanden ist
+        int searchNumber = 7;
+        if (numbers.Contains(searchNumber))
+        {
+            Console.WriteLine($"\nDie Zahl {searchNumber} wurde in der Liste gefunden.");
+        }
+        else
+        {
+            Console.WriteLine($"\nDie Zahl {searchNumber} wurde nicht in der Liste gefunden.");
+        }
+    }
+}
