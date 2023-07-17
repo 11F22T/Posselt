@@ -1,0 +1,86 @@
+// Importieren der notwendigen Bibliotheken
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+// Definieren des Namensraums
+namespace Temperaturen
+{
+    // Teilklasse Form1, die von der Form-Klasse erbt
+    public partial class Form1 : Form
+    {
+        // Deklaration eines 2D-Arrays zur Speicherung der Temperaturen und einer Zählervariablen
+        double[][] temperaturen;
+        int aktuellerEintrag = 0;
+
+        // Standardkonstruktor für Form1
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        // Ereignishandler, der aufgerufen wird, wenn der "Go"-Button geklickt wird
+        private void goButton_Click(object sender, EventArgs e)
+        {
+            // Überprüfung der Eingabe auf Gültigkeit und Umwandlung in eine Zahl
+            if (int.TryParse(anzahlWerteTextBox.Text, out int anzahl) && anzahl > 0)
+            {
+                // Initialisierung des Temperatur-Arrays mit der gewünschten Anzahl an Einträgen
+                temperaturen = new double[anzahl][];
+                aktuellerEintrag = 0;
+
+                // Schleife zum Einlesen der Temperaturen
+                for (int i = 0; i < anzahl; i++)
+                {
+                    // Einlesen der Tages- und Nachtemperaturen
+                    string tempTag = Microsoft.VisualBasic.Interaction.InputBox("Geben Sie die Tageshöchsttemperatur ein", "Tageshöchsttemperatur", "0", -1, -1);
+                    string tempNacht = Microsoft.VisualBasic.Interaction.InputBox("Geben Sie die Nachthöchsttemperatur ein", "Nachthöchsttemperatur", "0", -1, -1);
+
+                    // Überprüfen der Eingabe auf Gültigkeit und Speichern im Array
+                    if (double.TryParse(tempTag, out double tTag) && double.TryParse(tempNacht, out double tNacht))
+                    {
+                        temperaturen[aktuellerEintrag++] = new double[] { tTag, tNacht };
+                    }
+                }
+
+                // Erstellen einer DataTable zur Anzeige der Daten im DataGridView
+                DataTable datenTabelle = new DataTable();
+                datenTabelle.Columns.Add("Messwerte");
+                datenTabelle.Columns.Add("Temp. Tag");
+                datenTabelle.Columns.Add("Temp. Nacht");
+
+                // Füllen der DataTable mit den Daten aus dem Temperatur-Array
+                for (int i = 0; i < temperaturen.Length; i++)
+                {
+                    datenTabelle.Rows.Add(i + 1, temperaturen[i][0], temperaturen[i][1]);
+                }
+
+                // Anzeigen der Daten in einem DataGridView
+                dataGridView.DataSource = datenTabelle;
+
+                // Berechnen der Durchschnittstemperaturen und der Standardabweichungen
+                double durchschnittTempTag = temperaturen.Select(t => t[0]).Average();
+                double durchschnittTempNacht = temperaturen.Select(t => t[1]).Average();
+                double standardabweichungTag = Math.Sqrt(temperaturen.Select(t => (t[0] - durchschnittTempTag) * (t[0] - durchschnittTempTag)).Average());
+                double standardabweichungNacht = Math.Sqrt(temperaturen.Select(t => (t[1] - durchschnittTempNacht) * (t[1] - durchschnittTempNacht)).Average());
+
+                // Anzeigen der berechneten Werte in den TextBoxen
+                durchschnittTempTagTextBox.Text = durchschnittTempTag.ToString();
+                standardabweichungTagTextBox.Text = standardabweichungTag.ToString();
+                durchschnittTempNachtTextBox.Text = durchschnittTempNacht.ToString();
+                standardabweichungNachtTextBox.Text = standardabweichungNacht.ToString();
+            }
+            else
+            {
+                // Anzeigen einer Fehlermeldung, wenn die Eingabe ungültig ist
+                MessageBox.Show("Bitte geben Sie eine gültige Anzahl ein", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
+}
