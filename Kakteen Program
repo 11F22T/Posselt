@@ -1,0 +1,42 @@
+using System;
+
+namespace Kakteen
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] namen = {"Feigenkaktus Yellow Sunshine:", "Igelsäulenkaktus purple rain:", "Wüstenkaktus Golden Heart:", "Kugelkaktus Big star:\t" };
+
+
+            double[] anzahl = {350,320,280,450};
+
+
+            for (int i = 0; i < 4; i++)
+            {
+                Console.WriteLine(namen[i] +"\t Anzahl: " + anzahl[i]);
+                Console.WriteLine();
+
+            }
+            Console.WriteLine("__");
+            Console.WriteLine("");
+            int menge = 15;
+            int[] sDünger = {2,2,1,2};
+            int[] plusDünger = {1,1,4,3 };
+
+            Console.WriteLine("Benötigte Menge je Düngerart: ");
+            Console.WriteLine("Kakteenarten:  \t\t\t kakteen-Spezialdünger  \t Nährstoffplus Dünger");
+
+            for (int i = 0; i < sDünger.Length; i++)
+            {
+                int sDüngerMenge = (menge * sDünger[i]) / (sDünger[i] + plusDünger[i]);
+                int plusDüngerMenge = (menge * plusDünger[i]) / (sDünger[i] + plusDünger[i]);
+
+                Console.WriteLine(namen[i] +  "\t\t"+ sDüngerMenge + " ml " + "\t\t\t\t"+ plusDüngerMenge + " ml ");
+
+            }
+
+
+        }
+    }
+}
