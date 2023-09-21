@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Collections;
+
+namespace Bibliothek
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int eingabe = 0;
+
+            Console.WriteLine("Willkommen in der Bibliothek");
+            Console.WriteLine("____________________________");
+
+            List<string> Buecher = new List<string>();
+
+            Buecher.Add("Die verlorene Stadt");
+            Buecher.Add("Die Macht der Gewohnheit");
+            Buecher.Add("Der Herr der Ringe");
+            Buecher.Add("Die Alchimistin");
+            Buecher.Add("Der Große Gatsby");
+            Buecher.Add("Der Name der Rose");
+            Buecher.Add("Die Känguru-Chroniken");
+            Buecher.Add("Die Entdeckung der Langsamkeit");
+            Buecher.Add("Die Säulen der Erde");
+            Buecher.Add("Der Steppenwolf");
+
+            bool ende = true;
+
+            do
+            {
+                Console.WriteLine("Was möchten sie tun?");
+                Console.WriteLine("____________________");
+                Console.WriteLine("1 für Bücher anzeigen");
+                Console.WriteLine("2 für Buch hinzu fügen");
+                Console.WriteLine("3 für Buch löschen mit Titel eingabe");
+                Console.WriteLine("4 für für Buch löschen mit Nummer");
+                Console.WriteLine("5 Fürs Beenden des Programmes");
+                Console.WriteLine("____________________________________");
+
+                eingabe = System.Convert.ToInt32(Console.ReadLine());
+
+                switch (eingabe)
+                {
+
+
+                    case 1:
+                        foreach (object s in Buecher)
+                        {
+                            System.Console.WriteLine(s);
+                        }
+
+                        break;
+
+                    case 2:
+
+                        System.Console.WriteLine("Geben sie bitte denn namen des Buches ein");
+                        string Buechereingabe = System.Console.ReadLine();
+                        Buecher.Add(Buechereingabe);
+
+                        break;
+
+                    case 3:
+                        Console.WriteLine("Geben sie bitte den Titel ein den sie löschen möchten");
+                        string eingabeTitel = Console.ReadLine();
+                        Buecher.Remove(eingabeTitel);
+
+                        break;
+
+                    case 4:
+                        Console.WriteLine("Geben sie bitte die nummer des Buches ein das sie löschen wollen");
+                        int eingabeZahlTitel = System.Convert.ToInt32(Console.ReadLine());
+                        eingabeZahlTitel = eingabeZahlTitel - 1;
+                        Buecher.RemoveAt(eingabeZahlTitel);
+
+                        break;
+
+                    case 5:
+                        Console.WriteLine("Bis Bald");
+                        return;
+
+
+
+
+
+                    default:
+                        Console.WriteLine("Ungueltige Eingabe");
+                        break;
+
+                }
+
+            } while (ende);
+        }
+    }
+}
